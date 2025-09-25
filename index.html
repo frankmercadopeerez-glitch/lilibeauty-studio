@@ -39,11 +39,11 @@
         .btn-primary {
             background-color: #D4A3A8;
             color: white;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease; /* Transición para todos los efectos */
             font-weight: 500;
         }
         .btn-primary:hover {
-            background-color: #C39297;
+            background-color: #C39297; /* Cambio de color al pasar el mouse */
         }
         .btn-secondary {
             background-color: transparent;
@@ -99,15 +99,12 @@
             <nav class="hidden md:flex space-x-8 text-sm tracking-wide">
                 <a href="#about" class="text-gray-600 hover:text-brand-pink transition-colors">Sobre Mí</a>
                 <a href="#services" class="text-gray-600 hover:text-brand-pink transition-colors">Servicios</a>
-                <a href="#schedule" class="text-gray-600 hover:text-brand-pink transition-colors">Agendar Cita</a>
-                <a href="#courses" class="text-gray-600 hover:text-brand-pink transition-colors">Cursos</a>
+                <a href="#" class="text-gray-600 hover:text-brand-pink transition-colors schedule-button">Agendar Cita</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-brand-pink transition-colors">Reseñas</a>
                 <a href="#contact" class="text-gray-600 hover:text-brand-pink transition-colors">Contacto</a>
             </nav>
             <div class="flex items-center">
-                <button id="cart-button" class="relative text-gray-600 hover:text-brand-pink transition-colors">
-                    <i class="fas fa-shopping-cart fa-lg"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-2 bg-brand-pink text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
-                </button>
+                <!-- Botón del carrito eliminado ya que no hay productos para agregar -->
             </div>
         </div>
     </header>
@@ -119,7 +116,7 @@
                 <div class="bg-white/80 backdrop-blur-sm p-8 rounded-lg max-w-lg">
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight">Belleza que inspira confianza.</h1>
                     <p class="mt-4 text-gray-700">Transformamos tu belleza natural con servicios expertos y una pasión por el detalle. Bienvenido a tu nuevo espacio de confianza en Cartagena.</p>
-                    <a href="#services" class="mt-8 inline-block btn-primary py-3 px-8 rounded-full text-lg">Descubre nuestros servicios</a>
+                    <a href="#services" class="mt-8 inline-block btn-primary py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105">Descubre nuestros servicios</a>
                 </div>
             </div>
         </section>
@@ -154,78 +151,83 @@
                             <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
                         <div class="accordion-content">
-                            <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 items-start">
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-classic.jpg" alt="Set Clásicas PRO" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Set Clásicas PRO</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Una extensión por pestaña natural para un resultado muy discreto y elegante.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$80.000 COP</p>
+                            <div class="p-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 items-start">
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-classic.jpg" alt="Set Clásicas PRO" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Set Clásicas PRO</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Una extensión por pestaña natural para un resultado muy discreto y elegante.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$80.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-coffee.jpg" alt="Coffee SET" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Coffee SET</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Pestañas clásicas en color café, ideal para ojos claros y melenas rubias o pelirrojas.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$85.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-mascara.jpg" alt="Set Pestañina" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Set Pestañina</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Aumentamos el grosor para un acabado más dramático sin perder naturalidad.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$95.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-lili.jpg" alt="Set LILI" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Set LILI</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Pestañas de seda en forma de espigas para generar un efecto húmedo y ligero.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$100.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-hawaiian.jpg" alt="Volumen HAWAIANO" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Volumen HAWAIANO</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Abanicos de volumen súper livianos para una mezcla de movimiento y naturalidad.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$125.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-4d.jpg" alt="Volumen TECNOLÓGICO 4D" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Volumen TECNOLÓGICO 4D</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Abanicos 4D ideales para personas con pestañas escasas, finas o frágiles.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$140.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-soft.jpg" alt="Volumen SUAVE" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Volumen SUAVE</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Abanicos de volumen que aportan densidad manteniendo un acabado delicado.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$150.000 COP</p>
+                                        </div>
+                                    </div>
+                                    <!-- Service Item -->
+                                    <div class="flex space-x-4 items-center">
+                                        <img src="images/service-lashes-dark.jpg" alt="Volumen DARK" class="w-24 h-24 rounded-full object-cover shadow-sm transform transition-transform duration-300 hover:scale-150">
+                                        <div>
+                                            <h4 class="font-bold text-lg">Volumen DARK</h4>
+                                            <p class="text-sm text-gray-600 mt-1">Para un efecto más marcado, profundo y con una densidad intensa en la mirada.</p>
+                                            <p class="font-bold text-md text-brand-pink mt-2">$165.000 COP</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-coffee.jpg" alt="Coffee SET" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Coffee SET</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Pestañas clásicas en color café, ideal para ojos claros y melenas rubias o pelirrojas.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$85.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-mascara.jpg" alt="Set Pestañina" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Set Pestañina</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Aumentamos el grosor para un acabado más dramático sin perder naturalidad.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$95.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-lili.jpg" alt="Set LILI" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Set LILI</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Pestañas de seda en forma de espigas para generar un efecto húmedo y ligero.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$100.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-hawaiian.jpg" alt="Volumen HAWAIANO" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Volumen HAWAIANO</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Abanicos de volumen súper livianos para una mezcla de movimiento y naturalidad.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$125.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-4d.jpg" alt="Volumen TECNOLÓGICO 4D" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Volumen TECNOLÓGICO 4D</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Abanicos 4D ideales para personas con pestañas escasas, finas o frágiles.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$140.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-soft.jpg" alt="Volumen SUAVE" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Volumen SUAVE</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Abanicos de volumen que aportan densidad manteniendo un acabado delicado.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$150.000 COP</p>
-                                    </div>
-                                </div>
-                                <!-- Service Item -->
-                                <div class="flex space-x-4">
-                                    <img src="images/service-lashes-dark.jpg" alt="Volumen DARK" class="w-24 h-24 rounded-lg object-cover shadow-sm">
-                                    <div>
-                                        <h4 class="font-bold text-lg">Volumen DARK</h4>
-                                        <p class="text-sm text-gray-600 mt-1">Para un efecto más marcado, profundo y con una densidad intensa en la mirada.</p>
-                                        <p class="font-bold text-md text-brand-pink mt-2">$165.000 COP</p>
-                                    </div>
+                                <div class="mt-8 text-center">
+                                    <button class="btn-secondary py-2 px-6 rounded-full schedule-button transform transition-transform duration-300 hover:scale-105">Agendar Cita de Pestañas</button>
                                 </div>
                             </div>
                         </div>
@@ -237,17 +239,22 @@
                             <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
                         <div class="accordion-content">
-                            <ul class="p-6 space-y-3">
-                                <li class="flex justify-between"><span>Laminado de cejas</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
-                                <li class="flex justify-between"><span>Lifting de pestañas</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
-                                <li class="flex justify-between"><span>Retiro de pestañas</span> <span class="font-semibold text-gray-700">$20.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación de cejas</span> <span class="font-semibold text-gray-700">$15.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación + sombreado de cejas</span> <span class="font-semibold text-gray-700">$25.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación de bozo</span> <span class="font-semibold text-gray-700">$10.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación Axilas</span> <span class="font-semibold text-gray-700">$18.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación Media pierna</span> <span class="font-semibold text-gray-700">$35.000 COP</span></li>
-                                <li class="flex justify-between"><span>Depilación Pierna completa</span> <span class="font-semibold text-gray-700">$60.000 COP</span></li>
-                            </ul>
+                            <div class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex justify-between"><span>Laminado de cejas</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Lifting de pestañas</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Retiro de pestañas</span> <span class="font-semibold text-gray-700">$20.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación de cejas</span> <span class="font-semibold text-gray-700">$15.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación + sombreado de cejas</span> <span class="font-semibold text-gray-700">$25.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación de bozo</span> <span class="font-semibold text-gray-700">$10.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación Axilas</span> <span class="font-semibold text-gray-700">$18.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación Media pierna</span> <span class="font-semibold text-gray-700">$35.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Depilación Pierna completa</span> <span class="font-semibold text-gray-700">$60.000 COP</span></li>
+                                </ul>
+                                <div class="mt-8 text-center">
+                                    <button class="btn-secondary py-2 px-6 rounded-full schedule-button transform transition-transform duration-300 hover:scale-105">Agendar Cita de Cejas</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Accordion Item 3: Uñas -->
@@ -257,13 +264,18 @@
                             <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
                         <div class="accordion-content">
-                             <ul class="p-6 space-y-3">
-                                <li class="flex justify-between"><span>Manicure y pedicure TRADICIONAL</span> <span class="font-semibold text-gray-700">$40.000 COP</span></li>
-                                <li class="flex justify-between"><span>Manicure y pedicure SEMIPERMANENTE</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
-                                <li class="flex justify-between"><span>Press on</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
-                                <li class="flex justify-between"><span>Base ruber</span> <span class="font-semibold text-gray-700">$70.000 COP</span></li>
-                                <li class="flex justify-between"><span>Acrílicas</span> <span class="font-semibold text-gray-700">$60.000 COP</span></li>
-                            </ul>
+                             <div class="p-6">
+                                <ul class="space-y-3">
+                                    <li class="flex justify-between"><span>Manicure y pedicure TRADICIONAL</span> <span class="font-semibold text-gray-700">$40.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Manicure y pedicure SEMIPERMANENTE</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Press on</span> <span class="font-semibold text-gray-700">$80.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Base ruber</span> <span class="font-semibold text-gray-700">$70.000 COP</span></li>
+                                    <li class="flex justify-between"><span>Acrílicas</span> <span class="font-semibold text-gray-700">$60.000 COP</span></li>
+                                </ul>
+                                <div class="mt-8 text-center">
+                                    <button class="btn-secondary py-2 px-6 rounded-full schedule-button transform transition-transform duration-300 hover:scale-105">Agendar Cita de Uñas</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- Accordion Item 4: Tratamientos Faciales -->
@@ -273,26 +285,61 @@
                             <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
                         <div class="accordion-content">
-                            <div class="p-6 space-y-6">
-                                <div>
-                                    <div class="flex justify-between items-baseline">
-                                        <h4 class="font-bold text-lg">Limpieza Facial Básica</h4>
-                                        <span class="font-semibold text-gray-700">$95.000 COP</span>
+                            <div class="p-6">
+                                <div class="space-y-6">
+                                    <div>
+                                        <div class="flex justify-between items-baseline">
+                                            <h4 class="font-bold text-lg">Limpieza Facial Básica</h4>
+                                            <span class="font-semibold text-gray-700">$95.000 COP</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Incluye Exfoliación, Vapor ozono, Extracción de puntos negros, Mascarilla, Alta frecuencia, Hidratación y protección solar.</p>
                                     </div>
-                                    <p class="text-sm text-gray-600 mt-1">Incluye Exfoliación, Vapor ozono, Extracción de puntos negros, Mascarilla, Alta frecuencia, Hidratación y protección solar.</p>
+                                    <div>
+                                        <div class="flex justify-between items-baseline">
+                                            <h4 class="font-bold text-lg">Limpieza Facial Profunda</h4>
+                                            <span class="font-semibold text-gray-700">$120.000 COP</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Incluye todo lo de la básica más Microdermoabrasión y Terapia con Máscara LED.</p>
+                                    </div>
+                                    <div>
+                                         <div class="flex justify-between items-baseline">
+                                            <h4 class="font-bold text-lg">Tratamiento Antimanchas (Peeling)</h4>
+                                            <span class="font-semibold text-gray-700">$50.000 COP</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <div class="flex justify-between items-baseline">
-                                        <h4 class="font-bold text-lg">Limpieza Facial Profunda</h4>
-                                        <span class="font-semibold text-gray-700">$120.000 COP</span>
-                                    </div>
-                                    <p class="text-sm text-gray-600 mt-1">Incluye todo lo de la básica más Microdermoabrasión y Terapia con Máscara LED.</p>
+                                <div class="mt-8 text-center">
+                                    <button class="btn-secondary py-2 px-6 rounded-full schedule-button transform transition-transform duration-300 hover:scale-105">Agendar Cita Facial</button>
                                 </div>
-                                <div>
-                                     <div class="flex justify-between items-baseline">
-                                        <h4 class="font-bold text-lg">Tratamiento Antimanchas (Peeling)</h4>
-                                        <span class="font-semibold text-gray-700">$50.000 COP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Accordion Item 5: Micropigmentación -->
+                    <div class="border-b border-gray-200">
+                        <button class="accordion-header w-full text-left py-4 px-6 flex justify-between items-center transition hover:bg-gray-50">
+                            <span class="text-xl font-semibold text-gray-800">Micropigmentación de Labios</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6">
+                                <div class="space-y-6">
+                                    <div>
+                                        <div class="flex justify-between items-baseline">
+                                            <h4 class="font-bold text-lg">Lili Lips - Neutralización de Color</h4>
+                                            <span class="font-semibold text-gray-700">$400.000 COP</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Ideal para corregir tonalidades oscuras o violáceas en los labios, devolviéndoles un color rosado, uniforme y saludable.</p>
                                     </div>
+                                    <div>
+                                        <div class="flex justify-between items-baseline">
+                                            <h4 class="font-bold text-lg">Lili Lips - Efecto Acuarela</h4>
+                                            <span class="font-semibold text-gray-700">$350.000 COP</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mt-1">Define el contorno y aporta un toque de color suave y traslúcido, logrando un aspecto de labios revitalizados y jugosos.</p>
+                                    </div>
+                                </div>
+                                <div class="mt-8 text-center">
+                                    <button class="btn-secondary py-2 px-6 rounded-full schedule-button transform transition-transform duration-300 hover:scale-105">Agendar Cita de Labios</button>
                                 </div>
                             </div>
                         </div>
@@ -301,208 +348,46 @@
             </div>
         </section>
 
-        <!-- Schedule Section (Calendly) -->
-        <section id="schedule" class="py-20 md:py-28">
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 md:py-28 bg-white">
             <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Agenda tu Cita</h2>
-                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Elige el servicio, el día y la hora que prefieras. ¡Es rápido y fácil! Para la confirmación final, te enviaremos un mensaje de WhatsApp.</p>
-                
-                <div id="calendly-embed" style="min-width:320px;height:700px;"></div>
-            </div>
-        </section>
-
-
-        <!-- Courses Section (Virtual & Presential) - REVISED -->
-        <section id="courses" class="py-20 md:py-28 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Nuestras Capacitaciones</h2>
-                
-                <!-- Virtual Courses Subsection -->
-                <div class="mb-20">
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-4">Cursos Virtuales</h3>
-                    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">Aprende desde casa con nuestras masterclass diseñadas para llevar tu talento al siguiente nivel.</p>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Course Card 1 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                            <img src="images/course-lashes.jpg" alt="Curso de extensiones de pestañas" class="w-full h-56 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h4 class="text-xl font-bold mb-2">Masterclass en Pestañas Pelo a Pelo</h4>
-                                <p class="text-gray-600 text-sm flex-grow mb-4">Domina la técnica clásica desde cero. Aprende sobre visagismo, aplicación correcta, materiales y bioseguridad para iniciar tu propio negocio.</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-gray-800">$200.000 COP</span>
-                                    <button class="btn-primary py-2 px-4 rounded-lg" onclick="addToCart('Masterclass Pestañas', 200000)">Agregar al carrito</button>
-                                </div>
-                            </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Lo que dicen nuestras clientas</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Testimonial Card 1 -->
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-                        <!-- Course Card 2 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                            <img src="images/course-brows.jpg" alt="Curso de diseño de cejas" class="w-full h-56 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h4 class="text-xl font-bold mb-2">Diseño y Perfilado de Cejas con Henna</h4>
-                                <p class="text-gray-600 text-sm flex-grow mb-4">Perfecciona tu técnica de diseño de cejas. Aprenderás a mapear el rostro, aplicar la henna correctamente y lograr resultados simétricos y naturales.</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-gray-800">$150.000 COP</span>
-                                    <button class="btn-primary py-2 px-4 rounded-lg" onclick="addToCart('Curso Cejas con Henna', 150000)">Agregar al carrito</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Course Card 3 -->
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                            <img src="images/course-nails.jpg" alt="Curso de uñas acrílicas" class="w-full h-56 object-cover">
-                            <div class="p-6 flex flex-col flex-grow">
-                                <h4 class="text-xl font-bold mb-2">Iniciación a las Uñas Acrílicas</h4>
-                                <p class="text-gray-600 text-sm flex-grow mb-4">Conviértete en una profesional de las uñas. Este curso cobre la preparación, aplicación de acrílico, técnicas de limado y encapsulado básico.</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-2xl font-bold text-gray-800">$250.000 COP</span>
-                                    <button class="btn-primary py-2 px-4 rounded-lg" onclick="addToCart('Curso Uñas Acrílicas', 250000)">Agregar al carrito</button>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="text-gray-600 italic mb-4">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
+                        <p class="font-bold text-right">- Sofía Pérez</p>
                     </div>
-                </div>
-
-                <!-- Presential Course Subsection -->
-                <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-                    <div>
-                        <h3 class="text-2xl md:text-3xl font-bold mb-4">Capacitación Profesional VIP Presencial</h3>
-                        <p class="text-gray-600 mb-6">Una inmersión de 2 días 100% personalizada en Cartagena para iniciar tu carrera como Lashista Profesional. Aprenderás con bases sólidas y técnicas avanzadas desde el primer día, con mi acompañamiento paso a paso.</p>
-                        <h4 class="text-xl font-bold mb-4">Contenido del Curso:</h4>
-                        <div class="space-y-2">
-                             <!-- Module Accordion -->
-                             <div class="border-b border-gray-200">
-                                <button class="accordion-header w-full text-left py-3 px-2 flex justify-between items-center transition hover:bg-gray-50">
-                                    <span class="font-semibold text-gray-800">Módulo 1: Fundamentos</span>
-                                    <i class="fas fa-chevron-down transform transition-transform text-sm"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <ul class="text-sm text-gray-600 py-2 px-4 space-y-1">
-                                        <li>¿Qué son las extensiones de pestañas?</li>
-                                        <li>Anatomía del ojo y ciclo de crecimiento</li>
-                                        <li>Tipos de pestañas y su clasificación</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Module Accordion -->
-                            <div class="border-b border-gray-200">
-                                <button class="accordion-header w-full text-left py-3 px-2 flex justify-between items-center transition hover:bg-gray-50">
-                                    <span class="font-semibold text-gray-800">Módulo 2: Salud, Higiene y Seguridad</span>
-                                    <i class="fas fa-chevron-down transform transition-transform text-sm"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <ul class="text-sm text-gray-600 py-2 px-4 space-y-1">
-                                        <li>Medidas de bioseguridad</li>
-                                        <li>Posibles complicaciones y cómo prevenirlas</li>
-                                        <li>Retiro y limpieza adecuada</li>
-                                    </ul>
-                                </div>
-                            </div>
-                             <!-- Module Accordion -->
-                             <div class="border-b border-gray-200">
-                                <button class="accordion-header w-full text-left py-3 px-2 flex justify-between items-center transition hover:bg-gray-50">
-                                    <span class="font-semibold text-gray-800">Módulo 3: Productos y Materiales</span>
-                                    <i class="fas fa-chevron-down transform transition-transform text-sm"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <ul class="text-sm text-gray-600 py-2 px-4 space-y-1">
-                                        <li>Longitud, curvatura y grosor (¿Qué es PBT?)</li>
-                                        <li>Selección y uso del adhesivo perfecto</li>
-                                        <li>Parámetros de adhesión (humedad)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                             <!-- Module Accordion -->
-                             <div class="border-b border-gray-200">
-                                <button class="accordion-header w-full text-left py-3 px-2 flex justify-between items-center transition hover:bg-gray-50">
-                                    <span class="font-semibold text-gray-800">Módulo 4: Técnica y Aplicación</span>
-                                    <i class="fas fa-chevron-down transform transition-transform text-sm"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <ul class="text-sm text-gray-600 py-2 px-4 space-y-1">
-                                        <li>Aplicación correcta paso a paso</li>
-                                        <li>Dirección, alineación y diseño según tipo de ojo</li>
-                                        <li>Optimización del tiempo</li>
-                                    </ul>
-                                </div>
-                            </div>
-                             <!-- Module Accordion -->
-                             <div class="border-b border-gray-200">
-                                <button class="accordion-header w-full text-left py-3 px-2 flex justify-between items-center transition hover:bg-gray-50">
-                                    <span class="font-semibold text-gray-800">Módulo 5: Atención al Cliente y Negocio</span>
-                                    <i class="fas fa-chevron-down transform transition-transform text-sm"></i>
-                                </button>
-                                <div class="accordion-content">
-                                    <ul class="text-sm text-gray-600 py-2 px-4 space-y-1">
-                                        <li>Valoración previa al cliente</li>
-                                        <li>Consejos de servicio y fidelización</li>
-                                        <li>Tips de marketing y fotografía para redes sociales</li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <!-- Testimonial Card 2 -->
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
-
-                        <!-- NEW PRICING SECTION -->
-                        <div class="mt-8">
-                            <h4 class="text-xl font-bold mb-4">Opciones de Inversión:</h4>
-                            <div class="grid sm:grid-cols-2 gap-6">
-                                <!-- Option with Kit -->
-                                <div class="bg-rose-50 p-6 rounded-lg border border-brand-pink flex flex-col">
-                                    <h5 class="font-bold text-lg">OPCIÓN CON KIT</h5>
-                                    <p class="text-2xl font-bold text-gray-800 my-2">$799.900 COP</p>
-                                    <p class="text-sm text-gray-600 mb-4 flex-grow">Incluye todos los materiales esenciales para comenzar tu carrera:</p>
-                                    <ul class="text-xs text-gray-700 space-y-1 list-disc list-inside">
-                                        <li>Pinzas profesionales, Pega (adhesivo)</li>
-                                        <li>Parches de hidrogel, Cinta transpore</li>
-                                        <li>Bomba de secado, Espejo de comprobación</li>
-                                        <li>Caja de pestañas Nagaraku</li>
-                                        <li>Cepillos y Shampoo de pestañas</li>
-                                        <li>Microbrush, Soporte de pestañas, Anillos</li>
-                                    </ul>
-                                </div>
-                        
-                                <!-- Option without Kit -->
-                                <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 flex flex-col">
-                                    <h5 class="font-bold text-lg">OPCIÓN SIN KIT</h5>
-                                    <p class="text-2xl font-bold text-gray-800 my-2">$749.900 COP</p>
-                                    <p class="text-sm text-gray-600 mb-4 flex-grow">Perfecto si ya tienes tus propias herramientas.</p>
-                                     <ul class="text-sm text-gray-700 space-y-1 list-disc list-inside">
-                                        <li>Incluye solo material de práctica durante la clase.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="mt-6 bg-gray-100 p-4 rounded-lg text-center">
-                                <h5 class="font-bold mb-2">Ambas modalidades VIP incluyen:</h5>
-                                <ul class="text-sm text-gray-700 space-y-1">
-                                    <li>Práctica en modelo real supervisada</li>
-                                    <li>Guía impresa completa</li>
-                                    <li>Certificación al finalizar</li>
-                                    <li>Acceso a asistencia online durante 1 mes</li>
-                                </ul>
-                            </div>
-                        </div>
+                        <p class="text-gray-600 italic mb-4">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
+                        <p class="font-bold text-right">- Valentina Castro</p>
                     </div>
-                     <div>
-                        <div class="bg-gray-50 p-8 rounded-lg shadow-inner">
-                             <h3 class="text-2xl font-bold mb-4">Invierte en tu Futuro</h3>
-                             <p class="text-gray-600 mb-6">Esta capacitación es tu puerta de entrada al mundo de la belleza y el emprendimiento. Rellena el formulario y te enviaremos toda la información sobre fechas, precios y métodos de reserva.</p>
-                             <form id="contact-form" netlify>
-                                <div class="mb-4">
-                                    <label for="name" class="block text-gray-700 font-medium mb-2">Nombre Completo</label>
-                                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-pink" required>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="email" class="block text-gray-700 font-medium mb-2">Correo Electrónico</label>
-                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-pink" required>
-                                </div>
-                                <div class="mb-6">
-                                    <label for="phone" class="block text-gray-700 font-medium mb-2">Teléfono</label>
-                                    <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-pink" required>
-                                </div>
-                                <button type="submit" class="w-full btn-primary py-3 px-6 rounded-lg text-lg">Quiero ser una Lashista Profesional</button>
-                            </form>
-                            <div id="form-success-message" class="hidden mt-4 text-center p-4 bg-green-100 text-green-800 rounded-lg">
-                                ¡Gracias! Hemos recibido tu mensaje y te contactaremos pronto.
-                            </div>
+                    <!-- Testimonial Card 3 -->
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="text-yellow-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
+                        <p class="text-gray-600 italic mb-4">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
+                        <p class="font-bold text-right">- Camila Rodríguez</p>
                     </div>
                 </div>
             </div>
@@ -535,7 +420,7 @@
                      </div>
                  </div>
                  <div class="mt-10">
-                    <a href="https://www.google.com/maps/place/Cra.+18+%2326-1,+Cartagena+de+Indias,+Provincia+de+Cartagena,+Bol%C3%ADvar" target="_blank" rel="noopener noreferrer" class="inline-block text-center btn-secondary py-3 px-8 rounded-full text-lg">
+                    <a href="https://maps.app.goo.gl/gaUMJDuN5mMa33527" target="_blank" rel="noopener noreferrer" class="inline-block text-center btn-secondary py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105">
                         <i class="fas fa-map-location-dot mr-2"></i>Cómo llegar en Google Maps
                     </a>
                  </div>
@@ -555,50 +440,28 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Shopping Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-2xl w-full max-w-md m-4">
-            <div class="p-6 border-b flex justify-between items-center">
-                <h2 class="text-2xl font-bold">Carrito de Compras</h2>
-                <button id="close-cart-button" class="text-gray-500 hover:text-gray-800">&times;</button>
-            </div>
-            <div id="cart-items" class="p-6 max-h-80 overflow-y-auto">
-                <!-- Cart items will be injected here -->
-                <p class="text-gray-500 text-center">Tu carrito está vacío.</p>
-            </div>
-            <div class="p-6 bg-gray-50 rounded-b-lg">
-                <div class="flex justify-between items-center mb-4 text-lg font-bold">
-                    <span>Total:</span>
-                    <span id="cart-total">$0 COP</span>
-                </div>
-                <button class="w-full btn-primary py-3 rounded-lg" onclick="checkout()">Proceder al Pago</button>
-            </div>
-        </div>
-    </div>
-
     <!-- Calendly Widget JS -->
     <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script>
-        // --- Calendly Logic ---
-        const calendlyUrl = "https://calendly.com/frankmercadofit/citas-lilibeauty";
+        // --- Lógica del sitio ---
         
-        window.onload = function() {
-            try {
-                Calendly.initInlineWidget({
-                    url: calendlyUrl,
-                    parentElement: document.getElementById('calendly-embed'),
-                    prefill: {},
-                    utm: {}
-                });
-            } catch (error) {
-                console.error("Error loading Calendly widget:", error);
-            }
-        };
+        // --- Calendly Popup Logic ---
+        const calendlyUrl = "https://calendly.com/frankmercadofit/citas-lilibeauty";
+        const scheduleButtons = document.querySelectorAll('.schedule-button');
 
-        // --- Accordion Logic (FINAL FIX) ---
-        // Behavior for main service accordions (can stay open)
-        const serviceAccordionHeaders = document.querySelectorAll("#services .accordion-header");
-        serviceAccordionHeaders.forEach(header => {
+        scheduleButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita que el enlace de navegación cambie la URL
+                Calendly.initPopupWidget({
+                    url: calendlyUrl
+                });
+                return false;
+            });
+        });
+
+        // --- Accordion Logic ---
+        const accordionHeaders = document.querySelectorAll(".accordion-header");
+        accordionHeaders.forEach(header => {
             header.addEventListener("click", (event) => {
                 event.preventDefault();
                 header.blur(); 
@@ -614,131 +477,6 @@
                     icon.classList.add("rotate-180");
                 }
             });
-        });
-
-        // Behavior for course module accordions (only one open at a time)
-        const courseAccordionHeaders = document.querySelectorAll("#courses .accordion-header");
-        courseAccordionHeaders.forEach(header => {
-            header.addEventListener("click", (event) => {
-                event.preventDefault();
-                header.blur();
-
-                const content = header.nextElementSibling;
-                const icon = header.querySelector("i");
-                
-                // Close other course accordions
-                courseAccordionHeaders.forEach(otherHeader => {
-                    if (otherHeader !== header) {
-                        const otherContent = otherHeader.nextElementSibling;
-                        if (otherContent.style.maxHeight) {
-                            otherContent.style.maxHeight = null;
-                            otherHeader.querySelector("i").classList.remove("rotate-180");
-                        }
-                    }
-                });
-
-                // Toggle current accordion
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    icon.classList.remove("rotate-180");
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                    icon.classList.add("rotate-180");
-                }
-            });
-        });
-
-
-        // --- Shopping Cart Logic ---
-        let cart = [];
-        const cartButton = document.getElementById('cart-button');
-        const cartModal = document.getElementById('cart-modal');
-        const closeCartButton = document.getElementById('close-cart-button');
-        const cartCount = document.getElementById('cart-count');
-        const cartItemsContainer = document.getElementById('cart-items');
-        const cartTotal = document.getElementById('cart-total');
-
-        // Formateador de moneda colombiana
-        const copFormatter = new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0
-        });
-
-        function addToCart(courseName, price) {
-            const existingItem = cart.find(item => item.name === courseName);
-            if (existingItem) {
-                alert(`${courseName} ya está en tu carrito.`);
-            } else {
-                cart.push({ name: courseName, price: price });
-            }
-            updateCart();
-        }
-
-        function removeFromCart(courseName) {
-            cart = cart.filter(item => item.name !== courseName);
-            updateCart();
-        }
-
-        function updateCart() {
-            cartCount.textContent = cart.length;
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Tu carrito está vacío.</p>';
-            } else {
-                cartItemsContainer.innerHTML = cart.map(item => `
-                    <div class="flex justify-between items-center mb-4">
-                        <div>
-                            <p class="font-semibold">${item.name}</p>
-                            <p class="text-sm text-gray-500">${copFormatter.format(item.price)}</p>
-                        </div>
-                        <button class="text-red-500 hover:text-red-700 text-sm" onclick="removeFromCart('${item.name}')">Eliminar</button>
-                    </div>
-                `).join('');
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            cartTotal.textContent = copFormatter.format(total);
-        }
-
-        function checkout() {
-            if (cart.length === 0) {
-                alert("Tu carrito está vacío.");
-                return;
-            }
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            alert(`Procediendo al pago por un total de ${copFormatter.format(total)}. ¡Gracias por tu compra!`);
-            cart = [];
-            updateCart();
-            cartModal.classList.add('hidden');
-        }
-
-        // Modal visibility
-        cartButton.addEventListener('click', () => cartModal.classList.remove('hidden'));
-        closeCartButton.addEventListener('click', () => cartModal.classList.add('hidden'));
-        cartModal.addEventListener('click', (e) => {
-            if (e.target === cartModal) {
-                cartModal.classList.add('hidden');
-            }
-        });
-
-        // --- Form Submission Logic ---
-        const contactForm = document.getElementById('contact-form');
-        const successMessage = document.getElementById('form-success-message');
-
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            fetch("/", {
-                method: "POST",
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(formData).toString(),
-            })
-            .then(() => {
-                const formContainer = contactForm.parentElement;
-                formContainer.innerHTML = '';
-                formContainer.appendChild(successMessage);
-                successMessage.classList.remove('hidden');
-            })
-            .catch((error) => alert(error));
         });
 
     </script>
