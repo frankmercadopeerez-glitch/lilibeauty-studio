@@ -2,9 +2,9 @@
 <html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lili Beauty Studio - Extensiones de Pestañas en Cartagena</title>
-    <meta name="description" content="Expertos en extensiones de pestañas, cejas, uñas y tratamientos faciales en Cartagena. Transforma tu belleza en nuestro estudio en Manga.">
+    <meta name="description" content="Expertos en extensiones de pestañas pelo a pelo, diseño de cejas, lifting y belleza en Cartagena. Agenda tu cita en Manga.">
     
     <!-- Favicon -->
     <link rel="icon" type="image/jpg" href="images/favicon.jpg">
@@ -12,126 +12,126 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- GSAP (GreenSock) y ScrollTrigger -->
+    <!-- GSAP (GreenSock Animation Platform) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
-    <!-- Google Fonts - SOLO POPPINS (con peso 700 para títulos) -->
+    <!-- Google Fonts - SOLO POPPINS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome for Icons (Para el Menú Móvil) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        /* 1. Definición de Paleta de Colores CSS */
-        :root {
-            --color-bg: #FFF8F5;       /* Rosa pálido */
-            --color-text: #5C4033;     /* Marrón oscuro (para texto) */
-            --color-text-light: #7A5A4D; /* Marrón más claro */
-            --color-title: #4E3529;    /* Marrón oscuro para títulos */
-            --color-brand: #E6B4B8;    /* Rosa original (usado poco) */
-            --color-brand-dark: #B57B80; /* Rosa oscuro */
-            --color-gold: #B8860B;     /* Dorado/Bronce */
-        }
 
-        /* 2. Estilos Globales */
+    <style>
+        /* --- 1. Definición de Colores y Tipografía Base --- */
+        :root {
+            --color-bg: #FFF8F5;       /* Rosa muy pálido */
+            --color-text: #4A3A3A;     /* Marrón oscuro para texto */
+            --color-title: #3A2E2E;    /* Marrón más oscuro para títulos */
+            --color-gold: #B48B5A;     /* Dorado/Bronce para acentos */
+            --color-accent: #D4A3A8;   /* Rosa principal */
+            --color-accent-dark: #B57B80; /* Rosa oscuro (hover) */
+        }
+        
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text);
-            /* Ocultar cursor real */
-            cursor: none; 
+            cursor: none; /* Ocultar cursor por defecto */
+            font-weight: 300;
         }
-        /* Ocultar cursor en dispositivos táctiles */
-        @media (pointer: coarse) {
-            body {
-                cursor: auto;
+
+        /* Ocultar cursor solo en dispositivos con puntero (no táctiles) */
+        @media (pointer: fine) {
+            body, a, button {
+                cursor: none;
             }
         }
+        /* Mostrar cursor por defecto en dispositivos táctiles */
+        @media (pointer: coarse) {
+            body { cursor: auto; }
+        }
+
         /* Títulos (h1-h6) ahora usan Poppins con peso 700 */
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
             font-weight: 700;
             color: var(--color-title);
         }
+        
         /* Clases de utilidad para colores */
         .text-text { color: var(--color-text); }
-        .text-text-light { color: var(--color-text-light); }
+        .text-text-light { color: #5e4a4a; }
         .text-title { color: var(--color-title); }
         .text-gold { color: var(--color-gold); }
-        .hover\:text-gold:hover { color: var(--color-gold); }
         .bg-gold { background-color: var(--color-gold); }
+        .border-gold { border-color: var(--color-gold); }
+        .hover\:text-gold:hover { color: var(--color-gold); }
 
-        /* 3. Cursor Personalizado (Ojo PNG) */
+        /* --- 2. Cursor Personalizado (Ojo) --- */
         #custom-cursor {
             position: fixed;
-            left: 0; 
-            top: 0;
-            width: 35px;  /* Tamaño del ojo */
-            height: 35px;
-            pointer-events: none; 
-            transition: transform 0.1s ease-out; /* Movimiento suave */
-            transform: translate(-50%, -50%) scale(1);
+            left: 0; top: 0;
+            pointer-events: none;
             z-index: 9999;
-            will-change: transform;
+            transition: transform 0.15s ease-out;
+            transform: translate(-50%, -50%);
+            display: none; /* Oculto por defecto */
         }
         #custom-cursor img {
-            width: 100%;
-            height: 100%;
+            width: 30px; /* Tamaño del ojo */
+            height: auto;
+            transition: transform 0.2s ease-in-out;
         }
-        /* Efecto 'grow' al pasar sobre botones/links */
-        #custom-cursor.grow {
-            transform: translate(-50%, -50%) scale(1.2); /* Crece sutilmente */
+        /* Efecto 'grow' (escalar) */
+        #custom-cursor.grow img {
+            transform: scale(1.2);
         }
-        /* Ocultar en móvil y tablet */
-        @media (pointer: coarse) {
-            #custom-cursor {
-                display: none;
-            }
-            a, button, .interactive { cursor: pointer; }
-        }
-        /* Ocultar cursor real en elementos interactivos (solo desktop) */
+        /* Mostrar cursor solo en dispositivos con puntero (no táctiles) */
         @media (pointer: fine) {
-            a, button, .interactive { cursor: none; }
+            #custom-cursor {
+                display: block;
+            }
         }
-
-        /* 4. Estilos Botón WhatsApp Flotante */
+        
+        /* --- 3. Botón Flotante de WhatsApp --- */
         .whatsapp-float {
             position: fixed;
-            width: 80px; 
-            bottom: 30px;
-            right: 30px;
+            width: 90px; 
+            bottom: 20px;
+            right: 20px;
             z-index: 100;
             transition: transform 0.3s ease;
             text-align: center;
         }
         .whatsapp-float img {
-            width: 60px; 
-            height: 60px;
+            width: 50px; 
+            height: 50px;
             margin: 0 auto; 
             filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.25));
         }
         .whatsapp-float span {
-            font-size: 0.8rem; /* Texto pequeño */
+            font-size: 0.75rem; /* Texto más pequeño */
             font-weight: 500;
-            color: var(--color-text);
-            margin-top: 4px;
+            color: #333;
+            margin-top: 2px;
             display: block;
         }
         .whatsapp-float:hover { transform: scale(1.1); }
-        
-        /* 5. Carrusel de Reseñas Infinito */
-        @keyframes scroll {
+
+        /* --- 4. Animación Carrusel de Reseñas --- */
+        @keyframes scroll-infinite {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            100% { transform: translateX(calc(-18rem * 8)); } /* (w-72 * 8 tarjetas) */
         }
-        .scroller {
-            animation: scroll 15s linear infinite; /* 15s = Más rápido */
+        .animate-scroll-infinite {
+            animation: scroll-infinite 25s linear infinite; /* Más rápido (25s) */
         }
 
-        /* 6. Estilos Mega Menú (Desktop) */
+        /* --- 5. Estilos Menú (Desktop y Móvil) --- */
+        /* Mega Menú Desktop */
         .submenu, .submenu-level2 {
             display: none;
             position: absolute;
@@ -139,226 +139,244 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             border-radius: 0.5rem;
             z-index: 100;
+            padding: 0.5rem 0;
         }
-        .group:hover .submenu {
-            display: block;
-        }
+        .group:hover .submenu { display: block; }
         .group-level2:hover .submenu-level2 {
             display: block;
             left: 100%;
-            top: 0;
+            top: -0.5rem; /* Alineado con el padding del padre */
             white-space: nowrap;
         }
         .submenu a, .submenu-level2 a {
             display: block;
             padding: 0.75rem 1.25rem;
-            color: var(--color-text-light);
+            color: var(--color-text);
+            font-weight: 400;
         }
         .submenu a:hover, .submenu-level2 a:hover {
             background-color: var(--color-bg);
             color: var(--color-gold);
         }
-        /* Corregir ancho de submenú de uñas */
+        /* Ajuste de ancho para submenú de uñas */
         .submenu-uñas {
-            width: 18rem; /* 288px */
+            width: 19rem; /* 288px */
         }
 
-        /* 7. Estilos Acordeón (Servicios Móvil y FAQs) */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            padding: 0 1rem;
-        }
-        
-        /* 8. Estilos Tabs (Servicios Desktop) */
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .tab-button.active {
-            background-color: var(--color-brand-dark);
-            color: white;
-        }
-
-        /* 9. Estilos Menú Móvil */
-        .mobile-menu {
-            transform: translateX(100%);
+        /* Menú Móvil Deslizante */
+        #mobile-menu {
             transition: transform 0.3s ease-in-out;
         }
-        .mobile-menu.open {
+        .mobile-menu-closed {
+            transform: translateX(100%);
+        }
+        .mobile-menu-open {
             transform: translateX(0);
         }
-        .mobile-accordion-content {
+        /* Acordeón del Menú Móvil */
+        .mobile-submenu-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
         }
 
-        /* 10. Ocultar elementos para animar con GSAP */
-        .animate-on-load, .animate-on-scroll {
+        /* --- 6. Sección de Servicios (Tabs y Acordeón) --- */
+        /* Estilos de Tabs (Desktop) */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .tab-link {
+            transition: all 0.3s ease;
+            border-right: 4px solid transparent;
+        }
+        .tab-link.active {
+            background-color: var(--color-bg);
+            color: var(--color-gold);
+            font-weight: 600;
+            border-right-color: var(--color-gold);
+        }
+        /* Estilos de Acordeón (Móvil) */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+
+        /* --- 7. Animaciones GSAP (ScrollTrigger) --- */
+        /* Ocultar elementos para la animación */
+        .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        /* Clase 'is-visible' que añadirá GSAP */
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animate-on-load {
+            opacity: 0;
+            transform: translateY(20px);
         }
 
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Cursor - ¡tu PNG! -->
+    <!-- Cursor Personalizado -->
     <div id="custom-cursor">
-        <img src="images/leer.png" alt="cursor" />
+        <img src="images/leer.png" alt="Cursor">
     </div>
 
-    <!-- URL de WhatsApp -->
-    <script> const whatsappUrl = "https://wa.me/573234660971"; </script>
-
     <!-- Header -->
-    <header class="sticky top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            
-            <!-- Logo / Título -->
             <a href="index.html" class="text-2xl font-bold tracking-wider text-title interactive">Lili Beauty Studio</a>
             
             <!-- Menú Desktop (Oculto en móvil) -->
-            <nav class="hidden md:flex space-x-8 text-sm tracking-wide items-center">
-                <a href="#about" class="text-text-light hover:text-gold transition-colors interactive">Sobre Mí</a>
+            <nav class="hidden md:flex space-x-8 text-sm tracking-wide items-center font-medium">
+                <a href="#about" class="text-text hover:text-gold transition-colors interactive">Sobre Mí</a>
                 
                 <!-- Inicio del Mega Menú de Servicios -->
                 <div class="group relative"> 
-                    <a href="#services" class="text-text-light hover:text-gold transition-colors interactive cursor-pointer">
+                    <a href="#services" class="text-text hover:text-gold transition-colors interactive cursor-pointer">
                         Servicios <i class="fas fa-chevron-down fa-xs ml-1"></i>
                     </a>
                     <!-- Submenú Nivel 1: Categorías -->
                     <div class="submenu w-60">
                         <!-- Categoría: Pestañas -->
                         <div class="group-level2 relative"> 
-                            <a href="#services" class="flex justify-between items-center schedule-button-to-whatsapp">
+                            <a href="#services" class="flex justify-between items-center">
                                 Diseño de Mirada <i class="fas fa-chevron-right fa-xs"></i>
                             </a>
                             <!-- Submenú Nivel 2: Servicios de Pestañas -->
                             <div class="submenu-level2 w-64">
-                                <a href="#services" class="schedule-button-to-whatsapp">Set Clásicas PRO</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Coffee SET</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Set Pestañina</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Set LILI</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Volumen HAWAIANO</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Volumen TECNOLÓGICO 4D</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Volumen SUAVE</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Volumen DARK</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Set Clásicas PRO</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Coffee SET</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Set Pestañina</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Set LILI</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Volumen HAWAIANO</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Volumen TECNOLÓGICO 4D</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Volumen SUAVE</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Volumen DARK</a>
                             </div>
                         </div>
                         <!-- Categoría: Cejas y Depilación -->
                         <div class="group-level2 relative">
-                            <a href="#services" class="flex justify-between items-center schedule-button-to-whatsapp">
+                            <a href="#services" class="flex justify-between items-center">
                                 Cejas y Depilación <i class="fas fa-chevron-right fa-xs"></i>
                             </a>
                             <div class="submenu-level2 w-64">
-                                <a href="#services" class="schedule-button-to-whatsapp">Laminado de cejas</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Lifting de pestañas</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Depilación de cejas</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Depilación + sombreado</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Depilación de bozo</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Depilación Axilas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Laminado de cejas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Lifting de pestañas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Retiro de pestañas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Depilación de cejas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Depilación + sombreado</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Depilación de bozo</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Depilación Axilas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Media pierna</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Pierna completa</a>
                             </div>
                         </div>
                         <!-- Categoría: Uñas -->
                         <div class="group-level2 relative">
-                            <a href="#services" class="flex justify-between items-center schedule-button-to-whatsapp">
+                            <a href="#services" class="flex justify-between items-center">
                                 Diseño de Uñas <i class="fas fa-chevron-right fa-xs"></i>
                             </a>
-                            <div class="submenu-level2 submenu-uñas"> <!-- Clase de ancho corregido -->
-                                <a href="#services" class="schedule-button-to-whatsapp">Manicure y pedicure TRADICIONAL</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Manicure y pedicure SEMIPERMANENTE</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Press on</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Base ruber</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Acrílicas</a>
+                            <div class="submenu-level2 submenu-uñas"> <!-- Ancho ajustado -->
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Manicure y pedicure TRADICIONAL</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Manicure y pedicure SEMIPERMANENTE</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Press on</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Base ruber</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Acrílicas</a>
                             </div>
                         </div>
                         <!-- Categoría: Faciales -->
                         <div class="group-level2 relative">
-                            <a href="#services" class="flex justify-between items-center schedule-button-to-whatsapp">
+                            <a href="#services" class="flex justify-between items-center">
                                 Tratamientos Faciales <i class="fas fa-chevron-right fa-xs"></i>
                             </a>
                             <div class="submenu-level2 w-64">
-                                <a href="#services" class="schedule-button-to-whatsapp">Limpieza Facial Básica</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Limpieza Facial Profunda</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Tratamiento Antimanchas</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Limpieza Facial Básica</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Limpieza Facial Profunda</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Antimanchas</a>
                             </div>
                         </div>
                         <!-- Categoría: Micropigmentación -->
                         <div class="group-level2 relative">
-                            <a href="#services" class="flex justify-between items-center schedule-button-to-whatsapp">
+                            <a href="#services" class="flex justify-between items-center">
                                 Micropigmentación <i class="fas fa-chevron-right fa-xs"></i>
                             </a>
                             <div class="submenu-level2 w-64">
-                                <a href="#services" class="schedule-button-to-whatsapp">Lili Lips - Neutralización</a>
-                                <a href="#services" class="schedule-button-to-whatsapp">Lili Lips - Efecto Acuarela</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Lili Lips - Neutralización</a>
+                                <a href="https://wa.me/573234660971" target="_blank" class="interactive">Lili Lips - Efecto Acuarela</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Fin del Mega Menú de Servicios -->
 
-                <a href="blog/index.html" class="text-text-light hover:text-gold transition-colors interactive">Blog</a>
-                <a href="#testimonials" class="text-text-light hover:text-gold transition-colors interactive">Reseñas</a>
-                <a href="#contact" class="text-text-light hover:text-gold transition-colors interactive">Contacto</a>
-                <a href="#" class="text-text-light hover:text-gold transition-colors schedule-button-to-whatsapp interactive">Agendar Cita</a>
+                <a href="blog/" class="text-text hover:text-gold transition-colors interactive">Blog</a>
+                <a href="#testimonials" class="text-text hover:text-gold transition-colors interactive">Reseñas</a>
+                <a href="#contact" class="text-text hover:text-gold transition-colors interactive">Contacto</a>
+                <a href="https://wa.me/573234660971" target="_blank" class="text-text hover:text-gold transition-colors interactive">Agendar Cita</a>
             </nav>
-
-            <!-- Botón Menú Hamburguesa (Solo móvil) -->
-            <button id="mobile-menu-button" class="md:hidden text-title text-2xl interactive">
+            
+            <!-- Botón Menú Móvil (Oculto en desktop) -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-title interactive">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </header>
 
-    <!-- Menú Móvil Desplegable -->
-    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white shadow-lg z-[100] p-6 overflow-y-auto">
+    <!-- Menú Móvil Deslizante -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-[60] p-6 mobile-menu-closed md:hidden">
         <!-- Botón de Cerrar -->
-        <button id="mobile-menu-close" class="text-3xl text-text-light absolute top-4 right-6 interactive">&times;</button>
+        <button id="mobile-menu-close" class="absolute top-6 right-6 text-2xl text-text interactive">&times;</button>
         
-        <nav class="mt-12 flex flex-col space-y-4">
-            <a href="#about" class="text-lg text-title hover:text-gold interactive mobile-link">Sobre Mí</a>
+        <nav class="flex flex-col space-y-4 mt-12 text-lg">
+            <a href="#about" class="text-text hover:text-gold transition-colors mobile-link">Sobre Mí</a>
             
-            <!-- Acordeón de Servicios en Móvil -->
-            <div class="mobile-accordion">
-                <button class="w-full text-left text-lg text-title hover:text-gold interactive flex justify-between items-center">
+            <!-- Acordeón de Servicios Móvil -->
+            <div>
+                <button class="mobile-accordion-toggle w-full text-left text-text hover:text-gold transition-colors flex justify-between items-center">
                     <span>Servicios</span>
                     <i class="fas fa-chevron-down fa-xs transform transition-transform"></i>
                 </button>
-                <div class="mobile-accordion-content pl-4 pt-2 space-y-2">
-                    <a href="#services" class="block text-text-light hover:text-gold interactive mobile-link">Diseño de Mirada</a>
-                    <a href="#services" class="block text-text-light hover:text-gold interactive mobile-link">Cejas y Depilación</a>
-                    <a href="#services" class="block text-text-light hover:text-gold interactive mobile-link">Diseño de Uñas</a>
-                    <a href="#services" class="block text-text-light hover:text-gold interactive mobile-link">Tratamientos Faciales</a>
-                    <a href="#services" class="block text-text-light hover:text-gold interactive mobile-link">Micropigmentación</a>
+                <div class="mobile-submenu-content pl-4 mt-2 space-y-3 text-base">
+                    <a href="https://wa.me/573234660971" target="_blank" class="block text-text-light hover:text-gold mobile-link">Diseño de Mirada</a>
+                    <a href="https://wa.me/573234660971" target="_blank" class="block text-text-light hover:text-gold mobile-link">Cejas y Depilación</a>
+                    <a href="https://wa.me/573234660971" target="_blank" class="block text-text-light hover:text-gold mobile-link">Diseño de Uñas</a>
+                    <a href="https://wa.me/573234660971" target="_blank" class="block text-text-light hover:text-gold mobile-link">Tratamientos Faciales</a>
+                    <a href="https://wa.me/573234660971" target="_blank" class="block text-text-light hover:text-gold mobile-link">Micropigmentación</a>
                 </div>
             </div>
             
-            <a href="blog/index.html" class="text-lg text-title hover:text-gold interactive mobile-link">Blog</a>
-            <a href="#testimonials" class="text-lg text-title hover:text-gold interactive mobile-link">Reseñas</a>
-            <a href="#contact" class="text-lg text-title hover:text-gold interactive mobile-link">Contacto</a>
-            <a href="#" class="mt-4 inline-block text-center bg-gold text-white font-medium py-3 px-6 rounded-full text-lg interactive schedule-button-to-whatsapp">
-                Agendar Cita
-            </a>
+            <a href="blog/" class="text-text hover:text-gold transition-colors mobile-link">Blog</a>
+            <a href="#testimonials" class="text-text hover:text-gold transition-colors mobile-link">Reseñas</a>
+            <a href="#contact" class="text-text hover:text-gold transition-colors mobile-link">Contacto</a>
+            <a href="https://wa.me/573234660971" target="_blank" class="bg-gold text-white font-semibold py-2 px-4 rounded-full text-center interactive mobile-link">Agendar Cita</a>
         </nav>
     </div>
-    <!-- Fin Menú Móvil -->
+    <!-- Overlay del Menú Móvil -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/30 z-[55] hidden md:hidden"></div>
+
 
     <!-- CONTENIDO PRINCIPAL - Añadido overflow-visible para reparar el bug del footer -->
     <main class="overflow-visible">
+
         <!-- Hero Section -->
         <section class="min-h-screen bg-cover bg-center pt-32 pb-16 flex items-center" style="background-image: url('images/hero-bg.jpg');">
-            <div class="container mx-auto px-6 text-left">
-                <!-- Texto centrado en móvil (text-center sm:text-left) -->
-                <div class="bg-white/80 backdrop-blur-sm p-8 rounded-lg max-w-lg text-center sm:text-left">
-                    <h1 class="text-4xl md:text-5xl font-bold leading-tight animate-on-load">Belleza en Cartagena.</h1>
-                    <p class="mt-4 text-text-light animate-on-load" style="animation-delay: 0.1s;">Expertos en extensiones de pestañas, cejas y uñas. Transformamos tu belleza natural con servicios expertos y una pasión por el detalle. Bienvenido a tu nuevo espacio de confianza.</p>
-                    <!-- Botón centrado en móvil (mx-auto sm:mx-0) y subido (mt-6) -->
-                    <a href="#services" class="mt-6 mx-auto sm:mx-0 inline-block bg-gold text-white font-medium hover:bg-[#A1740A] py-3 px-8 rounded-full text-lg interactive transform transition-transform duration-300 hover:scale-105 animate-on-load" style="animation-delay: 0.2s;">Nuestros servicios en Cartagena</a>
+            <!-- CAMBIO: Añadido text-center sm:text-left para centrar en móvil -->
+            <div class="container mx-auto px-6 text-center sm:text-left">
+                <div class="bg-white/80 backdrop-blur-sm p-8 rounded-lg max-w-lg">
+                    <!-- CAMBIO: H1 nuevo, más profesional y con SEO -->
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight text-title animate-on-load">Profesionales de la Belleza en Cartagena.</h1>
+                    <p class="mt-4 text-text-light text-lg animate-on-load" style="animation-delay: 0.2s;">Expertos en extensiones de pestañas, cejas y uñas. Transformamos tu belleza natural con servicios expertos y una pasión por el detalle. Bienvenido a tu nuevo espacio de confianza.</p>
+                    <div class="mt-8 animate-on-load" style="animation-delay: 0.4s;">
+                        <a href="#services" class="inline-block bg-gold text-white font-semibold py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105 interactive">
+                            Nuestros servicios en Cartagena
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -386,43 +404,43 @@
 
         <!-- Services Section -->
         <section id="services" class="py-20 md:py-28 bg-white overflow-hidden">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Nuestros Servicios de Belleza en Cartagena</h2>
+            <div class="container mx-auto px-6 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Nuestros Servicios en Cartagena</h2>
                 
-                <!-- VISTA DESKTOP: TABS (Oculto en móvil) -->
-                <div class="hidden md:flex max-w-6xl mx-auto animate-on-scroll">
-                    <!-- Menú de Tabs (Vertical) -->
-                    <div class="w-1/4 flex flex-col space-y-2">
-                        <button class="tab-button p-4 text-left font-semibold text-lg text-title rounded-lg interactive active" data-tab="tab-pestañas">
-                            <span class="text-2xl w-6 mr-2 text-center">👁️</span> Diseño de Mirada
+                <!-- VISTA DESKTOP (TABS) - Oculto en móvil -->
+                <div class="hidden md:flex max-w-6xl mx-auto">
+                    <!-- Menú de Tabs -->
+                    <div class="w-1/4 space-y-2">
+                        <button data-tab="tab-pestañas" class="tab-link active w-full text-left p-4 text-lg font-medium text-text hover:text-gold interactive">
+                            <span class="mr-2">👁️</span> Diseño de Mirada
                         </button>
-                        <button class="tab-button p-4 text-left font-semibold text-lg text-title rounded-lg interactive" data-tab="tab-cejas">
-                            <span class="text-2xl w-6 mr-2 text-center">✏️</span> Cejas y Depilación
+                        <button data-tab="tab-cejas" class="tab-link w-full text-left p-4 text-lg font-medium text-text hover:text-gold interactive">
+                            <span class="mr-2">✍️</span> Cejas y Depilación
                         </button>
-                        <button class="tab-button p-4 text-left font-semibold text-lg text-title rounded-lg interactive" data-tab="tab-uñas">
-                            <span class="text-2xl w-6 mr-2 text-center">💅</span> Diseño de Uñas
+                        <button data-tab="tab-uñas" class="tab-link w-full text-left p-4 text-lg font-medium text-text hover:text-gold interactive">
+                            <span class="mr-2">💅</span> Diseño de Uñas
                         </button>
-                        <button class="tab-button p-4 text-left font-semibold text-lg text-title rounded-lg interactive" data-tab="tab-faciales">
-                            <span class="text-2xl w-6 mr-2 text-center">💆‍♀️</span> Tratamientos Faciales
+                        <button data-tab="tab-faciales" class="tab-link w-full text-left p-4 text-lg font-medium text-text hover:text-gold interactive">
+                            <span class="mr-2">🌿</span> Tratamientos Faciales
                         </button>
-                        <button class="tab-button p-4 text-left font-semibold text-lg text-title rounded-lg interactive" data-tab="tab-micro">
-                            <span class="text-2xl w-6 mr-2 text-center">💋</span> Micropigmentación
+                        <button data-tab="tab-micro" class="tab-link w-full text-left p-4 text-lg font-medium text-text hover:text-gold interactive">
+                            <span class="mr-2">💋</span> Micropigmentación
                         </button>
                     </div>
                     
                     <!-- Contenido de Tabs -->
                     <div class="w-3/4 pl-12">
-                        <!-- Pestañas -->
+                        <!-- Pestañas (2 Columnas) -->
                         <div id="tab-pestañas" class="tab-content active">
                             <h3 class="text-2xl font-bold mb-8">Diseño de Mirada - Extensiones de Pestañas</h3>
-                            <div class="space-y-6">
+                            <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-8">
                                 <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-classic.jpg" alt="Set Clásicas PRO" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Set Clásicas PRO</h4>
                                         <p class="text-sm text-text-light mt-1">Una extensión por pestaña natural para un resultado muy discreto y elegante.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$80.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$80.000 COP</p>
                                     </div>
                                 </div>
                                 <!-- Servicio -->
@@ -431,32 +449,34 @@
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Coffee SET</h4>
                                         <p class="text-sm text-text-light mt-1">Pestañas clásicas en color café, ideal para ojos claros y melenas rubias o pelirrojas.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$85.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$85.000 COP</p>
                                     </div>
                                 </div>
-                                <!-- ... (Resto de servicios de pestañas) ... -->
+                                <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-mascara.jpg" alt="Set Pestañina" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Set Pestañina</h4>
                                         <p class="text-sm text-text-light mt-1">Aumentamos el grosor para un acabado más dramático sin perder naturalidad.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$95.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$95.000 COP</p>
                                     </div>
                                 </div>
+                                <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-lili.jpg" alt="Set LILI" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Set LILI</h4>
                                         <p class="text-sm text-text-light mt-1">Pestañas de seda en forma de espigas para generar un efecto húmedo y ligero.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$100.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$100.000 COP</p>
                                     </div>
                                 </div>
+                                <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-hawaiian.jpg" alt="Volumen HAWAIANO" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Volumen HAWAIANO</h4>
                                         <p class="text-sm text-text-light mt-1">Abanicos de volumen súper livianos para una mezcla de movimiento y naturalidad.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$125.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$125.000 COP</p>
                                     </div>
                                 </div>
                                 <!-- Servicio con Descuento -->
@@ -465,149 +485,151 @@
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Volumen TECNOLÓGICO 4D (30% OFF)</h4>
                                         <p class="text-sm text-text-light mt-1">Abanicos 4D ideales para personas con pestañas escasas, finas o frágiles.</p>
-                                        <div class="flex items-baseline space-x-2 mt-2">
-                                            <p class="font-bold text-md text-red-600">$98.000 COP</p>
-                                            <p class="font-bold text-sm text-gray-400 line-through">$140.000 COP</p>
+                                        <div class="mt-2">
+                                            <span class="font-bold text-lg text-red-500">$98.000 COP</span>
+                                            <span class="text-md text-gray-500 line-through ml-2">$140.000 COP</span>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-soft.jpg" alt="Volumen SUAVE" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Volumen SUAVE</h4>
                                         <p class="text-sm text-text-light mt-1">Abanicos de volumen que aportan densidad manteniendo un acabado delicado.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$150.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$150.000 COP</p>
                                     </div>
                                 </div>
+                                <!-- Servicio -->
                                 <div class="flex space-x-4 items-center">
                                     <img src="images/service-lashes-dark.jpg" alt="Volumen DARK" class="w-24 h-24 rounded-full object-cover shadow-md flex-shrink-0" loading="lazy">
                                     <div>
                                         <h4 class="font-bold text-lg text-title">Volumen DARK</h4>
                                         <p class="text-sm text-text-light mt-1">Para un efecto más marcado, profundo y con una densidad intensa en la mirada.</p>
-                                        <p class="font-bold text-md text-gold mt-2">$165.000 COP</p>
+                                        <p class="font-bold text-lg text-gold mt-2">$165.000 COP</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Cejas -->
+
+                        <!-- Cejas y Depilación (2 Columnas) -->
                         <div id="tab-cejas" class="tab-content">
                             <h3 class="text-2xl font-bold mb-8">Cuidado de Cejas y Depilación</h3>
-                             <ul class="space-y-4">
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
+                            <ul class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-12">
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
                                     <div>
-                                        <h4 class="font-bold text-lg text-title">Laminado de cejas</h4>
+                                        <h4 class="font-semibold text-lg text-title">Laminado de cejas</h4>
                                         <p class="text-sm text-text-light">Define y fija tus cejas para un look peinado.</p>
                                     </div>
-                                    <span class="font-semibold text-gold text-lg">$80.000 COP</span>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$80.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
                                     <div>
-                                        <h4 class="font-bold text-lg text-title">Lifting de pestañas</h4>
+                                        <h4 class="font-semibold text-lg text-title">Lifting de pestañas</h4>
                                         <p class="text-sm text-text-light">Eleva y curva tus pestañas naturales.</p>
                                     </div>
-                                    <span class="font-semibold text-gold text-lg">$80.000 COP</span>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$80.000 COP</span>
                                 </li>
-                                <!-- ... (Resto de servicios de cejas) ... -->
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Retiro de pestañas</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$20.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Retiro de pestañas</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$20.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación de cejas</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$15.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación de cejas</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$15.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación + sombreado de cejas</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$25.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación + sombreado de cejas</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$25.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación de bozo</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$10.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación de bozo</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$10.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación Axilas</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$18.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación Axilas</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$18.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación Media pierna</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$35.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación Media pierna</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$35.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Depilación Pierna completa</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$60.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Depilación Pierna completa</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$60.000 COP</span>
                                 </li>
                             </ul>
                         </div>
-                        <!-- Uñas -->
+                        
+                        <!-- Diseño de Uñas (2 Columnas) -->
                         <div id="tab-uñas" class="tab-content">
                             <h3 class="text-2xl font-bold mb-8">Diseño de Uñas</h3>
-                            <ul class="space-y-4">
-                                <!-- ... (Servicios de uñas) ... -->
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Manicure y pedicure TRADICIONAL</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$40.000 COP</span>
+                            <ul class="space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-12">
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Manicure y pedicure TRADICIONAL</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$40.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Manicure y pedicure SEMIPERMANENTE</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$80.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Manicure y pedicure SEMIPERMANENTE</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$80.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Press on</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$80.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Press on</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$80.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Base ruber</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$70.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Base ruber</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$70.000 COP</span>
                                 </li>
-                                <li class="flex justify-between items-center pb-2 border-b border-gray-100">
-                                    <div><h4 class="font-bold text-lg text-title">Acrílicas</h4></div>
-                                    <span class="font-semibold text-gold text-lg">$60.000 COP</span>
+                                <li class="flex justify-between items-center py-2 border-b border-gray-100">
+                                    <h4 class="font-semibold text-lg text-title">Acrílicas</h4>
+                                    <span class="font-bold text-lg text-gold whitespace-nowrap">$60.000 COP</span>
                                 </li>
                             </ul>
                         </div>
-                        <!-- Faciales -->
+
+                        <!-- Tratamientos Faciales (1 Columna) -->
                         <div id="tab-faciales" class="tab-content">
                             <h3 class="text-2xl font-bold mb-8">Tratamientos Faciales</h3>
                             <div class="space-y-6">
-                                <!-- ... (Servicios faciales) ... -->
                                 <div>
                                     <div class="flex justify-between items-baseline">
                                         <h4 class="font-bold text-lg text-title">Limpieza Facial Básica</h4>
-                                        <span class="font-semibold text-gold text-lg">$95.000 COP</span>
+                                        <span class="font-bold text-lg text-gold">$95.000 COP</span>
                                     </div>
-                                    <p class="text-sm text-text-light mt-1">Incluye Exfoliación, Vapor ozono, Extracción, Mascarilla, Alta frecuencia, Hidratación y protección solar.</p>
+                                    <p class="text-sm text-text-light mt-1">Incluye Exfoliación, Vapor ozono, Extracción de puntos negros, Mascarilla, Alta frecuencia, Hidratación y protección solar.</p>
                                 </div>
-                                <!-- Servicio con Descuento -->
+                                <!-- Facial con Descuento -->
                                 <div>
                                     <div class="flex justify-between items-baseline">
                                         <h4 class="font-bold text-lg text-title">Limpieza Facial Profunda (30% OFF)</h4>
                                         <div>
-                                            <span class="font-semibold text-red-600 text-lg">$84.000 COP</span>
-                                            <span class="font-semibold text-gray-400 text-md line-through ml-2">$120.000 COP</span>
+                                            <span class="font-bold text-lg text-red-500">$84.000 COP</span>
+                                            <span class="text-md text-gray-500 line-through ml-2">$120.000 COP</span>
                                         </div>
                                     </div>
                                     <p class="text-sm text-text-light mt-1">Incluye todo lo de la básica más Microdermoabrasión y Terapia con Máscara LED.</p>
                                 </div>
                                 <div>
-                                    <div class="flex justify-between items-baseline">
+                                     <div class="flex justify-between items-baseline">
                                         <h4 class="font-bold text-lg text-title">Tratamiento Antimanchas (Peeling)</h4>
-                                        <span class="font-semibold text-gold text-lg">$50.000 COP</span>
+                                        <span class="font-bold text-lg text-gold">$50.000 COP</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Micropigmentación -->
+
+                        <!-- Micropigmentación (1 Columna) -->
                         <div id="tab-micro" class="tab-content">
                             <h3 class="text-2xl font-bold mb-8">Micropigmentación de Labios</h3>
                             <div class="space-y-6">
-                                <!-- ... (Servicios de micro) ... -->
-                                <!-- Servicio con Descuento -->
+                                <!-- Micro con Descuento -->
                                 <div>
                                     <div class="flex justify-between items-baseline">
                                         <h4 class="font-bold text-lg text-title">Lili Lips - Neutralización (30% OFF)</h4>
                                         <div>
-                                            <span class="font-semibold text-red-600 text-lg">$280.000 COP</span>
-                                            <span class="font-semibold text-gray-400 text-md line-through ml-2">$400.000 COP</span>
+                                            <span class="font-bold text-lg text-red-500">$280.000 COP</span>
+                                            <span class="text-md text-gray-500 line-through ml-2">$400.000 COP</span>
                                         </div>
                                     </div>
                                     <p class="text-sm text-text-light mt-1">Ideal para corregir tonalidades oscuras o violáceas en los labios, devolviéndoles un color rosado, uniforme y saludable.</p>
@@ -615,7 +637,7 @@
                                 <div>
                                     <div class="flex justify-between items-baseline">
                                         <h4 class="font-bold text-lg text-title">Lili Lips - Efecto Acuarela</h4>
-                                        <span class="font-semibold text-gold text-lg">$350.000 COP</span>
+                                        <span class="font-bold text-lg text-gold">$350.000 COP</span>
                                     </div>
                                     <p class="text-sm text-text-light mt-1">Define el contorno y aporta un toque de color suave y traslúcido, logrando un aspecto de labios revitalizados y jugosos.</p>
                                 </div>
@@ -623,249 +645,277 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- VISTA MÓVIL: ACORDEÓN (Oculto en desktop) -->
-                <div class="md:hidden max-w-4xl mx-auto space-y-2 animate-on-scroll">
+                
+                <!-- VISTA MÓVIL (ACORDEÓN) - Oculto en desktop -->
+                <div class="md:hidden space-y-2">
                     <!-- Acordeón Pestañas -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
-                            <span class="text-xl font-semibold text-title">Diseño de Mirada</span>
-                            <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
+                    <div>
+                        <button class="accordion-header w-full text-left p-4 text-lg font-semibold text-title bg-white rounded-lg shadow-sm flex justify-between items-center interactive">
+                            <span><span class="mr-2">👁️</span> Diseño de Mirada</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
-                        <div class="accordion-content">
+                        <div class="accordion-content bg-white/50 rounded-b-lg">
                             <div class="p-4 space-y-4">
-                                <!-- Servicios aquí con color -->
+                                <!-- Servicios aquí... -->
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Set Clásicas PRO</h4>
-                                    <p class="text-sm text-text-light mt-1">Resultado muy discreto y elegante.</p>
-                                    <p class="font-bold text-md text-gold mt-2">$80.000 COP</p>
+                                    <h4 class="font-bold text-title">Set Clásicas PRO</h4>
+                                    <p class="text-sm text-text-light mt-1">Una extensión por pestaña natural.</p>
+                                    <p class="font-bold text-gold mt-1">$80.000 COP</p>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Coffee SET</h4>
-                                    <p class="text-sm text-text-light mt-1">Ideal para ojos claros y melenas rubias.</p>
-                                    <p class="font-bold text-md text-gold mt-2">$85.000 COP</p>
+                                    <h4 class="font-bold text-title">Coffee SET</h4>
+                                    <p class="text-sm text-text-light mt-1">Pestañas clásicas en color café.</p>
+                                    <p class="font-bold text-gold mt-1">$85.000 COP</p>
                                 </div>
-                                <!-- Descuento Móvil -->
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Volumen TECNOLÓGICO 4D (30% OFF)</h4>
-                                    <p class="text-sm text-text-light mt-1">Ideal para pestañas escasas.</p>
-                                    <div class="flex items-baseline space-x-2 mt-2">
-                                        <p class="font-bold text-md text-red-600">$98.000 COP</p>
-                                        <p class="font-bold text-sm text-gray-400 line-through">$140.000 COP</p>
-                                    </div>
+                                    <h4 class="font-bold text-title">Set Pestañina</h4>
+                                    <p class="font-bold text-gold mt-1">$95.000 COP</p>
                                 </div>
-                                <!-- ... (Resto de servicios de pestañas en móvil) ... -->
+                                <div>
+                                    <h4 class="font-bold text-title">Set LILI</h4>
+                                    <p class="font-bold text-gold mt-1">$100.000 COP</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-title">Volumen HAWAIANO</h4>
+                                    <p class="font-bold text-gold mt-1">$125.000 COP</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-title">Volumen TECNOLÓGICO 4D (30% OFF)</h4>
+                                    <span class="font-bold text-red-500">$98.000 COP</span>
+                                    <span class="text-gray-500 line-through ml-2">$140.000 COP</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-title">Volumen SUAVE</h4>
+                                    <p class="font-bold text-gold mt-1">$150.000 COP</p>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-title">Volumen DARK</h4>
+                                    <p class="font-bold text-gold mt-1">$165.000 COP</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <!-- Acordeón Cejas -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
-                            <span class="text-xl font-semibold text-title">Cejas y Depilación</span>
-                            <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
+                    <div>
+                        <button class="accordion-header w-full text-left p-4 text-lg font-semibold text-title bg-white rounded-lg shadow-sm flex justify-between items-center interactive">
+                            <span><span class="mr-2">✍️</span> Cejas y Depilación</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
-                        <div class="accordion-content">
-                            <ul class="p-4 space-y-3">
-                                <li class="flex justify-between"><span class="text-text-light">Laminado de cejas</span> <span class="font-semibold text-gold">$80.000 COP</span></li>
-                                <li class="flex justify-between"><span class="text-text-light">Lifting de pestañas</span> <span class="font-semibold text-gold">$80.000 COP</span></li>
-                                <!-- ... (Resto de servicios de cejas en móvil) ... -->
-                            </ul>
+                        <div class="accordion-content bg-white/50 rounded-b-lg">
+                            <div class="p-4 space-y-3">
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Laminado de cejas</h4> <span class="font-bold text-gold">$80.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Lifting de pestañas</h4> <span class="font-bold text-gold">$80.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Retiro de pestañas</h4> <span class="font-bold text-gold">$20.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Depilación de cejas</h4> <span class="font-bold text-gold">$15.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Depilación + sombreado</h4> <span class="font-bold text-gold">$25.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Depilación de bozo</h4> <span class="font-bold text-gold">$10.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Depilación Axilas</h4> <span class="font-bold text-gold">$18.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Media pierna</h4> <span class="font-bold text-gold">$35.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Pierna completa</h4> <span class="font-bold text-gold">$60.000 COP</span></div>
+                            </div>
                         </div>
                     </div>
                     <!-- Acordeón Uñas -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
-                            <span class="text-xl font-semibold text-title">Diseño de Uñas</span>
-                            <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
+                    <div>
+                        <button class="accordion-header w-full text-left p-4 text-lg font-semibold text-title bg-white rounded-lg shadow-sm flex justify-between items-center interactive">
+                            <span><span class="mr-2">💅</span> Diseño de Uñas</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
-                        <div class="accordion-content">
-                             <ul class="p-4 space-y-3">
-                                <li class="flex justify-between"><span class="text-text-light">Manicure y pedicure TRADICIONAL</span> <span class="font-semibold text-gold">$40.000 COP</span></li>
-                                <li class="flex justify-between"><span class="text-text-light">Manicure y pedicure SEMIPERMANENTE</span> <span class="font-semibold text-gold">$80.000 COP</span></li>
-                                <!-- ... (Resto de servicios de uñas en móvil) ... -->
-                            </ul>
+                        <div class="accordion-content bg-white/50 rounded-b-lg">
+                            <div class="p-4 space-y-3">
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Manicure y pedicure TRADICIONAL</h4> <span class="font-bold text-gold">$40.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Manicure y pedicure SEMIPERMANENTE</h4> <span class="font-bold text-gold">$80.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Press on</h4> <span class="font-bold text-gold">$80.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Base ruber</h4> <span class="font-bold text-gold">$70.000 COP</span></div>
+                                <div class="flex justify-between"><h4 class="font-semibold text-title">Acrílicas</h4> <span class="font-bold text-gold">$60.000 COP</span></div>
+                            </div>
                         </div>
                     </div>
                     <!-- Acordeón Faciales -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
-                            <span class="text-xl font-semibold text-title">Tratamientos Faciales</span>
-                            <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
+                    <div>
+                        <button class="accordion-header w-full text-left p-4 text-lg font-semibold text-title bg-white rounded-lg shadow-sm flex justify-between items-center interactive">
+                            <span><span class="mr-2">🌿</span> Tratamientos Faciales</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
-                        <div class="accordion-content">
+                        <div class="accordion-content bg-white/50 rounded-b-lg">
                             <div class="p-4 space-y-4">
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Limpieza Facial Básica</h4>
-                                    <p class="font-bold text-md text-gold mt-2">$95.000 COP</p>
-                                </div>
-                                <!-- Descuento Móvil -->
-                                <div>
-                                    <h4 class="font-bold text-lg text-title">Limpieza Facial Profunda (30% OFF)</h4>
-                                    <div class="flex items-baseline space-x-2 mt-2">
-                                        <p class="font-bold text-md text-red-600">$84.000 COP</p>
-                                        <p class="font-bold text-sm text-gray-400 line-through">$120.000 COP</p>
-                                    </div>
+                                    <div class="flex justify-between items-baseline"><h4 class="font-bold text-title">Limpieza Facial Básica</h4> <span class="font-bold text-gold">$95.000 COP</span></div>
+                                    <p class="text-sm text-text-light mt-1">Exfoliación, Vapor ozono, Extracción, Mascarilla, Alta frecuencia...</p>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Tratamiento Antimanchas</h4>
-                                    <p class="font-bold text-md text-gold mt-2">$50.000 COP</p>
+                                    <h4 class="font-bold text-title">Limpieza Facial Profunda (30% OFF)</h4>
+                                    <p class="text-sm text-text-light mt-1">Básica + Microdermoabrasión y Máscara LED.</p>
+                                    <span class="font-bold text-red-500">$84.000 COP</span>
+                                    <span class="text-gray-500 line-through ml-2">$120.000 COP</span>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-baseline"><h4 class="font-bold text-title">Antimanchas (Peeling)</h4> <span class="font-bold text-gold">$50.000 COP</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Acordeón Micropigmentación -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
-                            <span class="text-xl font-semibold text-title">Micropigmentación</span>
-                            <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
+                    <!-- Acordeón Micro -->
+                    <div>
+                        <button class="accordion-header w-full text-left p-4 text-lg font-semibold text-title bg-white rounded-lg shadow-sm flex justify-between items-center interactive">
+                            <span><span class="mr-2">💋</span> Micropigmentación</span>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
                         </button>
-                        <div class="accordion-content">
+                        <div class="accordion-content bg-white/50 rounded-b-lg">
                             <div class="p-4 space-y-4">
-                                <!-- Descuento Móvil -->
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Lili Lips - Neutralización (30% OFF)</h4>
-                                    <div class="flex items-baseline space-x-2 mt-2">
-                                        <p class="font-bold text-md text-red-600">$280.000 COP</p>
-                                        <p class="font-bold text-sm text-gray-400 line-through">$400.000 COP</p>
-                                    </div>
+                                    <h4 class="font-bold text-title">Lili Lips - Neutralización (30% OFF)</h4>
+                                    <p class="text-sm text-text-light mt-1">Corrige tonalidades oscuras o violáceas.</p>
+                                    <span class="font-bold text-red-500">$280.000 COP</span>
+                                    <span class="text-gray-500 line-through ml-2">$400.000 COP</span>
                                 </div>
                                 <div>
-                                    <h4 class="font-bold text-lg text-title">Lili Lips - Efecto Acuarela</h4>
-                                    <p class="font-bold text-md text-gold mt-2">$350.000 COP</p>
+                                    <h4 class="font-bold text-title">Lili Lips - Efecto Acuarela</h4>
+                                    <p class="text-sm text-text-light mt-1">Define y aporta un toque de color suave.</p>
+                                    <p class="font-bold text-gold mt-1">$350.000 COP</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- Testimonials Section -->
         <section id="testimonials" class="py-20 md:py-28 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Lo que dicen nuestras clientas</h2>
-                
-                <!-- Contenedor del Carrusel Infinito -->
-                <div class="scroller-container w-full overflow-hidden relative animate-on-scroll" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
-                    <div class="flex w-max">
-                        <!-- Contenido Original -->
-                        <div class="flex scroller space-x-8 px-4">
-                            <!-- Reseña 1 (Móvil: p-6, w-72 | Desktop: sm:p-8, md:w-96) -->
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
+            <div class="container mx-auto animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Lo que dicen nuestras clientas</h2>
+                <!-- Carrusel Infinito -->
+                <div class="relative w-full overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+                    <div class="flex w-max animate-scroll-infinite">
+                        <!-- Tarjetas (Duplicadas para efecto infinito) -->
+                        <div class="flex w-max">
+                            <!-- Tarjeta 1 (Más pequeña en móvil) -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
                                 <p class="font-bold text-right text-title">- Sofía Pérez</p>
                             </div>
-                            <!-- Reseña 2 -->
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
+                            <!-- Tarjeta 2 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
                                 <p class="font-bold text-right text-title">- Valentina Castro</p>
                             </div>
-                            <!-- Reseña 3 -->
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
+                            <!-- Tarjeta 3 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
                                 <p class="font-bold text-right text-title">- Camila Rodríguez</p>
                             </div>
-                            <!-- Reseña 4 -->
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"El mejor lugar para extensiones de pestañas en Manga. La duración y la calidad son incomparables."</p>
+                            <!-- Tarjeta 4 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"¡El mejor lugar! Súper profesionales y el resultado de mi limpieza facial fue 10/10. Volveré sin duda."</p>
                                 <p class="font-bold text-right text-title">- Isabella Gómez</p>
+                            </div>
+                            <!-- Tarjeta 5 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"Me hice la micropigmentación de labios y amé el resultado. Muy natural y el color perfecto. Gracias por la paciencia."</p>
+                                <p class="font-bold text-right text-title">- Daniela Torres</p>
+                            </div>
+                            <!-- Tarjeta 6 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"Excelente atención y profesionalismo. Las pestañas me duran muchísimo y siempre se ven perfectas."</p>
+                                <p class="font-bold text-right text-title">- María F. López</p>
+                            </div>
+                            <!-- Tarjeta 7 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"El set LILI es mi favorito, un efecto húmedo súper top. Todas son muy queridas."</p>
+                                <p class="font-bold text-right text-title">- Laura Mendoza</p>
+                            </div>
+                            <!-- Tarjeta 8 -->
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4">
+                                <div class="text-yellow-400 mb-3">★★★★★</div>
+                                <p class="text-text-light italic mb-4 h-24">"Súper recomendado el lugar, la limpieza facial profunda es de otro nivel. Mi piel quedó increíble."</p>
+                                <p class="font-bold text-right text-title">- Ana Sofía Vélez</p>
                             </div>
                         </div>
-                        <!-- Contenido Duplicado (para el efecto infinito) -->
-                        <div class="flex scroller space-x-8 px-4" aria-hidden="true">
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
-                                <p class="font-bold text-right text-title">- Sofía Pérez</p>
-                            </div>
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
-                                <p class="font-bold text-right text-title">- Valentina Castro</p>
-                            </div>
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
-                                <p class="font-bold text-right text-title">- Camila Rodríguez</p>
-                            </div>
-                            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
-                                <div class="text-yellow-400 mb-4"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                                <p class="text-text-light italic mb-4">"El mejor lugar para extensiones de pestañas en Manga. La duración y la calidad son incomparables."</p>
-                                <p class="font-bold text-right text-title">- Isabella Gómez</p>
-                            </div>
+                        <!-- Duplicado -->
+                        <div class="flex w-max" aria-hidden="true">
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p><p class="font-bold text-right text-title">- Sofía Pérez</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p><p class="font-bold text-right text-title">- Valentina Castro</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p><p class="font-bold text-right text-title">- Camila Rodríguez</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"¡El mejor lugar! Súper profesionales y el resultado de mi limpieza facial fue 10/10. Volveré sin duda."</p><p class="font-bold text-right text-title">- Isabella Gómez</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"Me hice la micropigmentación de labios y amé el resultado. Muy natural y el color perfecto. Gracias por la paciencia."</p><p class="font-bold text-right text-title">- Daniela Torres</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"Excelente atención y profesionalismo. Las pestañas me duran muchísimo y siempre se ven perfectas."</p><p class="font-bold text-right text-title">- María F. López</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"El set LILI es mi favorito, un efecto húmedo súper top. Todas son muy queridas."</p><p class="font-bold text-right text-title">- Laura Mendoza</p></div>
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 mx-4"><div class="text-yellow-400 mb-3">★★★★★</div><p class="text-text-light italic mb-4 h-24">"Súper recomendado el lugar, la limpieza facial profunda es de otro nivel. Mi piel quedó increíble."</p><p class="font-bold text-right text-title">- Ana Sofía Vélez</p></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- Blog Section -->
+
+        <!-- Blog Preview Section -->
         <section id="blog" class="py-20 md:py-28 bg-white overflow-hidden">
-            <div class="container mx-auto px-6">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Visita Nuestro Blog</h2>
-                <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+            <div class="container mx-auto px-6 max-w-5xl animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Visita Nuestro Blog</h2>
+                <div class="grid md:grid-cols-2 gap-10">
                     <!-- Artículo 1 -->
-                    <article class="bg-gray-50 p-8 rounded-lg shadow-md animate-on-scroll">
-                        <span class="text-sm text-brand-dark font-medium">Precios y Consejos</span>
+                    <div class="bg-white p-6 rounded-lg shadow-md transition-shadow hover:shadow-xl">
+                        <span class="text-sm text-gold font-medium">Precios y Consejos</span>
                         <h3 class="text-2xl font-bold my-2 hover:text-gold transition-colors">
                             <a href="blog/cuanto-cuestan-pestanas-cartagena/" class="interactive">¿Cuánto cuestan las pestañas pelo a pelo en Cartagena?</a>
                         </h3>
                         <p class="text-text-light mb-4 leading-relaxed">Analizamos los precios y factores que influyen en el costo de las extensiones de pestañas en la ciudad...</p>
                         <a href="blog/cuanto-cuestan-pestanas-cartagena/" class="font-bold text-title hover:text-gold interactive">Leer artículo completo &rarr;</a>
-                    </article>
+                    </div>
                     <!-- Artículo 2 -->
-                    <article class="bg-gray-50 p-8 rounded-lg shadow-md animate-on-scroll" style="animation-delay: 0.1s;">
-                        <span class="text-sm text-brand-dark font-medium">Cuidado Personal</span>
+                    <div class="bg-white p-6 rounded-lg shadow-md transition-shadow hover:shadow-xl">
+                        <span class="text-sm text-gold font-medium">Cuidado Personal</span>
                         <h3 class="text-2xl font-bold my-2 hover:text-gold transition-colors">
                             <a href="blog/lifting-vs-extensiones/" class="interactive">Lifting vs. Extensiones: ¿Cuál es mejor para ti?</a>
                         </h3>
-                        <p class="text-text-light mb-4 leading-relaxed">Comparamos dos de los tratamientos de mirada más populares para ayudarte a decidir cuál se adapta a tu estilo...</p>
+                        <p class="text-text-light mb-4 leading-relaxed">Comparamos dos de los tratamientos de mirada más populares para ayudarte a decidir cuál se adapta a tu estilo de vida...</p>
                         <a href="blog/lifting-vs-extensiones/" class="font-bold text-title hover:text-gold interactive">Leer artículo completo &rarr;</a>
-                    </article>
-                </div>
-                <div class="text-center mt-12 animate-on-scroll">
-                    <a href="blog/index.html" class="bg-gold text-white font-medium hover:bg-[#A1740A] py-3 px-8 rounded-full text-lg interactive transform transition-transform duration-300 hover:scale-105">Ver todos los artículos</a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- FAQs Section -->
         <section id="faqs" class="py-20 md:py-28 overflow-hidden">
-            <div class="container mx-auto px-6 max-w-3xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 animate-on-scroll">Preguntas Frecuentes</h2>
-                <div class="space-y-2 animate-on-scroll">
+            <div class="container mx-auto px-6 max-w-3xl animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+                <div class="space-y-4">
                     <!-- FAQ 1 -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
+                    <div class="border-b border-gray-200 pb-2">
+                        <button class="faq-header w-full text-left py-4 flex justify-between items-center interactive">
                             <span class="text-xl font-semibold text-title">¿Cuánto duran las extensiones de pestañas?</span>
                             <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
                         </button>
-                        <div class="accordion-content">
-                            <p class="p-4 text-text-light">Las extensiones de pestañas pelo a pelo duran indefinidamente con el cuidado y los mantenimientos adecuados. El ciclo natural de tus pestañas es de 6 a 8 semanas, por lo que tus extensiones se caerán junto con ellas.</p>
+                        <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="pt-2 pb-4 text-text-light leading-relaxed">Las extensiones de pestañas pelo a pelo duran indefinidamente con el cuidado y los mantenimientos adecuados. El ciclo natural de tus pestañas es de 6 a 8 semanas, por lo que tus extensiones se caerán junto con ellas.</p>
                         </div>
                     </div>
-                    <!-- FAQ 2 -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
+                    <!-- FAQ 2 (Markdown Corregido) -->
+                    <div class="border-b border-gray-200 pb-2">
+                        <button class="faq-header w-full text-left py-4 flex justify-between items-center interactive">
                             <span class="text-xl font-semibold text-title">¿Cada cuánto debo hacer el mantenimiento?</span>
                             <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
                         </button>
-                        <div class="accordion-content">
-                            <p class="p-4 text-text-light">Recomendamos hacer el mantenimiento (o "retoque") **cada 15 días**. En este tiempo, habrás perdido cerca del 40% de las extensiones por el ciclo natural de crecimiento. Con el retoque, rellenamos los espacios vacíos para que tu mirada vuelva a verse llena y perfecta.</p>
+                        <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="pt-2 pb-4 text-text-light leading-relaxed">Recomendamos hacer el mantenimiento (o "retoque") <strong class="text-gold">cada 15 días</strong>. En este tiempo, habrás perdido cerca del 40% de las extensiones por el ciclo natural de crecimiento. Con el retoque, rellenamos los espacios vacíos para que tu mirada vuelva a verse llena y perfecta.</p>
                         </div>
                     </div>
                     <!-- FAQ 3 -->
-                    <div class="border-b border-gray-200">
-                        <button class="accordion-header w-full text-left py-4 flex justify-between items-center transition interactive">
+                    <div class="border-b border-gray-200 pb-2">
+                        <button class="faq-header w-full text-left py-4 flex justify-between items-center interactive">
                             <span class="text-xl font-semibold text-title">¿Las extensiones dañan mis pestañas naturales?</span>
                             <i class="fas fa-chevron-down transform transition-transform text-gold"></i>
                         </button>
-                        <div class="accordion-content">
-                            <p class="p-4 text-text-light">No, si son aplicadas por una profesional certificada. En Lili Beauty Studio utilizamos técnicas y adhesivos de grado médico que aíslan cada pestaña natural, permitiendo que sigan su ciclo de crecimiento normal sin verse afectadas.</p>
+                        <div class="faq-content overflow-hidden max-h-0 transition-all duration-500 ease-in-out">
+                            <p class="pt-2 pb-4 text-text-light leading-relaxed">No. Cuando son aplicadas por una profesional certificada con la técnica correcta y los materiales adecuados, tus pestañas naturales no sufren ningún daño. El peso y la longitud se eligen cuidadosamente para no sobrecargar tu pestaña natural.</p>
                         </div>
                     </div>
                 </div>
@@ -873,37 +923,37 @@
         </section>
 
         <!-- Contact & Location Section -->
-        <section id="contact" class="py-20 md:py-28 bg-gray-100 overflow-hidden">
+        <section id="contact" class="py-20 md:py-28 bg-white overflow-hidden">
             <div class="container mx-auto px-6 text-center animate-on-scroll">
-                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Encuéntranos en Manga, Cartagena</h2>
-                 <p class="text-text-light mb-8 max-w-xl mx-auto">Visítanos y vive la experiencia Lili Beauty Studio. ¡Estamos listos para atenderte!</p>
+                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Encuéntranos en Cartagena</h2>
+                 <p class="text-text-light mb-8 max-w-xl mx-auto">Visítanos en Manga y vive la experiencia Lili Beauty Studio. ¡Estamos listos para atenderte!</p>
                  
-                 <div class="space-y-6 max-w-md mx-auto text-left">
-                    <p class="flex items-start">
-                        <span class="text-2xl mr-4 w-5 text-center">📍</span>
-                        <span class="text-text-light">Barrio Manga, Av. Jimenez Calle 26 #18,<br>Edificio Entre Islas, Piso 1.</span>
+                 <div class="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-10 items-center text-lg">
+                    <p class="flex items-center text-text">
+                        <span class="text-2xl mr-3">📍</span>
+                        <span>Barrio Manga, Av. Jimenez Calle 26 #18,<br>Edificio Entre Islas, Piso 1.</span>
                     </p>
-                    <p class="flex items-start">
-                        <span class="text-2xl mr-4 w-5 text-center">✉️</span>
-                        <a href="mailto:Lililashes22@gmail.com" class="text-text-light hover:text-gold interactive">Lililashes22@gmail.com</a>
+                     <p class="flex items-center text-text">
+                        <span class="text-2xl mr-3">✉️</span>
+                        <a href="mailto:Lililashes22@gmail.com" class="hover:text-gold interactive">Lililashes22@gmail.com</a>
                     </p>
                  </div>
 
                  <div class="flex justify-center gap-8 mt-8">
                     <a href="https://wa.me/573234660971" target="_blank" class="text-text-light hover:text-gold transition-colors interactive">
-                        <img src="images/whatsapp-logo.png" alt="WhatsApp Lili Beauty" class="w-8 h-8">
+                        <img src="images/whatsapp-logo.png" alt="WhatsApp Lili Beauty" class="w-8 h-8" loading="lazy">
                     </a>
                     <a href="https://www.instagram.com/lili_beauty_oficial/" target="_blank" class="text-text-light hover:text-gold transition-colors interactive">
-                        <img src="images/instagram-logo.png" alt="Instagram Lili Beauty" class="w-8 h-8">
+                        <img src="images/instagram-logo.png" alt="Instagram Lili Beauty" class="w-8 h-8" loading="lazy">
                     </a>
                     <a href="https://www.facebook.com/profile.php?id=100076263302597" target="_blank" class="text-text-light hover:text-gold transition-colors interactive">
-                        <img src="images/logo-facebook.png" alt="Facebook Lili Beauty" class="w-8 h-8">
+                        <img src="images/logo-facebook.png" alt="Facebook Lili Beauty" class="w-8 h-8" loading="lazy">
                     </a>
                  </div>
 
                  <div class="mt-10">
-                    <a href="https://maps.app.goo.gl/gaUMJDuN5mMa33527" target="_blank" rel="noopener noreferrer" class="inline-block text-center bg-white text-title border border-gray-300 font-medium hover:bg-gray-50 py-3 px-8 rounded-full text-lg interactive transform transition-transform duration-300 hover:scale-105">
-                        <i class="fas fa-map-location-dot mr-2 text-brand-dark"></i>Cómo llegar en Google Maps
+                    <a href="https://maps.app.goo.gl/gaUMJDuN5mMa33527" target="_blank" rel="noopener noreferrer" class="inline-block text-center bg-transparent border-2 border-gold text-gold font-semibold py-3 px-8 rounded-full text-lg transform transition-all duration-300 hover:scale-105 hover:bg-gold hover:text-white interactive">
+                        <i class="fas fa-map-location-dot mr-2"></i>Cómo llegar en Google Maps
                     </a>
                  </div>
             </div>
@@ -913,75 +963,97 @@
     <!-- Footer -->
     <footer class="bg-title py-8">
         <div class="container mx-auto px-6 text-center">
-            <!-- Texto del footer con color corregido (text-[var(--color-text)]) -->
+            <!-- Texto del Footer con color corregido -->
             <p class="text-sm text-[var(--color-text)]">&copy; 2025 Lili Beauty Studio Cartagena. Todos los derechos reservados.</p>
         </div>
     </footer>
     
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/573234660971" class="whatsapp-float interactive" target="_blank" rel="noopener noreferrer">
-        <img src="images/whatsapp-logo.png" alt="Agenda tu cita en WhatsApp">
+        <img src="images/whatsapp-logo.png" alt="Agenda tu cita en WhatsApp" loading="lazy">
         <span>Agenda tu cita</span>
     </a>
 
-    <!-- !!!!!!!!!!! TODO EL JAVASCRIPT ESTÁ AQUÍ !!!!!!!!!!! -->
+    <!-- --- TODO EL JAVASCRIPT --- -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            const body = document.body;
-            
-            // --- 1. Lógica del Cursor Personalizado (Ojo) ---
+            // --- 1. Lógica del Cursor Personalizado ---
             const cursor = document.getElementById('custom-cursor');
-            
-            // Ocultar cursor si no se mueve (solo en desktop)
-            let timeout;
-            const hideCursor = () => cursor.style.opacity = '0';
-            const showCursor = () => {
-                cursor.style.opacity = '1';
-                clearTimeout(timeout);
-                timeout = setTimeout(hideCursor, 1000); // Ocultar después de 1 seg de inactividad
-            };
-
-            // Solo activar la lógica del cursor si no es un dispositivo táctil
-            if (window.matchMedia("(pointer: fine)").matches) {
+            if (cursor) {
                 document.addEventListener('mousemove', (e) => {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
-                    showCursor();
                 });
 
-                document.addEventListener('mouseleave', hideCursor);
-                document.addEventListener('mouseenter', showCursor);
-
-                // Lógica de Hover (Crecer/Achicar)
                 const interactiveElements = document.querySelectorAll('a, button, .interactive');
                 interactiveElements.forEach(el => {
                     el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
                     el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
                 });
-            } else {
-                cursor.style.display = 'none'; // Ocultar permanentemente en táctil
+            }
+            
+            // --- 2. Lógica del Menú Móvil ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const menuCloseButton = document.getElementById('mobile-menu-close');
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            const openMenu = () => {
+                menu.classList.remove('mobile-menu-closed');
+                menu.classList.add('mobile-menu-open');
+                overlay.classList.remove('hidden');
+            };
+            const closeMenu = () => {
+                menu.classList.add('mobile-menu-closed');
+                menu.classList.remove('mobile-menu-open');
+                overlay.classList.add('hidden');
+            };
+            if (menuButton) menuButton.addEventListener('click', openMenu);
+            if (menuCloseButton) menuCloseButton.addEventListener('click', closeMenu);
+            if (overlay) overlay.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu)); // Cierra al hacer clic en un enlace
+            
+            // --- 3. Lógica Acordeón del Menú Móvil ---
+            const mobileAccordionToggle = document.querySelector('.mobile-accordion-toggle');
+            if (mobileAccordionToggle) {
+                mobileAccordionToggle.addEventListener('click', () => {
+                    const content = mobileAccordionToggle.nextElementSibling;
+                    const icon = mobileAccordionToggle.querySelector('i');
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.classList.remove('rotate-180');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.classList.add('rotate-180');
+                    }
+                });
             }
 
-            // --- 2. Lógica de "Agendar Cita" (WhatsApp) ---
-            const scheduleButtons = document.querySelectorAll('.schedule-button-to-whatsapp');
-            scheduleButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.open(whatsappUrl, '_blank');
-                    return false;
+            // --- 4. Lógica de Tabs de Servicios (Desktop) ---
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const tabId = link.getAttribute('data-tab');
+                    
+                    // Desactivar todos
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Activar el seleccionado
+                    link.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
                 });
             });
 
-            // --- 3. Lógica Acordeón (Servicios Móvil y FAQs) ---
+            // --- 5. Lógica de Acordeón de Servicios (Móvil) ---
             const accordionHeaders = document.querySelectorAll(".accordion-header");
             accordionHeaders.forEach(header => {
-                header.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    header.blur(); 
+                header.addEventListener("click", () => {
                     const content = header.nextElementSibling;
                     const icon = header.querySelector("i");
-
                     if (content.style.maxHeight) {
                         content.style.maxHeight = null;
                         icon.classList.remove("rotate-180");
@@ -992,79 +1064,54 @@
                 });
             });
 
-            // --- 4. Lógica Menú Móvil (Hamburguesa) ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenuClose = document.getElementById('mobile-menu-close');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-            
-            const openMenu = () => mobileMenu.classList.add('open');
-            const closeMenu = () => mobileMenu.classList.remove('open');
-
-            mobileMenuButton.addEventListener('click', openMenu);
-            mobileMenuClose.addEventListener('click', closeMenu);
-            // Cerrar menú al hacer clic en un enlace (para anclas)
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-            // Acordeón dentro del menú móvil
-            const mobileAccordion = document.querySelector('.mobile-accordion button');
-            mobileAccordion.addEventListener('click', () => {
-                const content = mobileAccordion.nextElementSibling;
-                const icon = mobileAccordion.querySelector('i');
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                    icon.classList.remove('rotate-180');
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    icon.classList.add('rotate-180');
-                }
-            });
-
-            // --- 5. Lógica Tabs (Servicios Desktop) ---
-            const tabButtons = document.querySelectorAll('.tab-button');
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Quitar 'active' de todos
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    
-                    // Añadir 'active' al clickeado
-                    button.classList.add('active');
-                    document.getElementById(button.dataset.tab).classList.add('active');
+            // --- 6. Lógica de Acordeón de FAQs ---
+            const faqHeaders = document.querySelectorAll(".faq-header");
+            faqHeaders.forEach(header => {
+                header.addEventListener("click", () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector("i");
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.classList.remove("rotate-180");
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.classList.add("rotate-180");
+                    }
                 });
             });
 
-            // --- 6. Animaciones GSAP (Carga y Scroll) ---
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Animación al cargar página (Hero)
+            // --- 7. Animaciones GSAP ---
+            // Animación al cargar (Hero)
             gsap.to(".animate-on-load", {
                 opacity: 1,
                 y: 0,
                 duration: 0.8,
-                stagger: 0.2, // Anima uno después del otro
-                ease: "power3.out"
+                stagger: 0.2, // Cada elemento aparece con 0.2s de diferencia
+                ease: "power2.out"
             });
 
-            // Animación al hacer scroll
-            const sections = document.querySelectorAll(".animate-on-scroll");
+            // Animación al hacer scroll (Secciones)
+            const sections = document.querySelectorAll('.animate-on-scroll');
             sections.forEach(section => {
                 gsap.to(section, {
                     scrollTrigger: {
                         trigger: section,
-                        start: "top 90%", // Empieza cuando el 90% de la sección entra en pantalla
-                        toggleActions: "play none none none" // Solo se activa una vez
+                        start: "top 85%", // Cuando el 85% superior de la sección entra en la vista
+                        toggleActions: "play none none none",
+                        once: true // La animación solo ocurre una vez
                     },
                     opacity: 1,
                     y: 0,
-                    duration: 1.0,
-                    ease: "power3.out"
+                    duration: 0.8,
+                    ease: "power2.out",
+                    onComplete: () => {
+                        section.classList.add('is-visible'); // Añade clase por si acaso
+                    }
                 });
             });
 
         });
     </script>
+
 </body>
 </html>
