@@ -20,6 +20,9 @@
     <!-- Librería para convertir Markdown (para las FAQs) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     
+    <!-- SCRIPT OBLIGATORIO DE NETLIFY IDENTITY (El "Portero") -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
     <style>
         :root {
             --color-bg: #FFF8F5; 
@@ -762,74 +765,15 @@
     </main>
 
     
-    <!-- INICIO: Footer Estandarizado -->
-    <!-- CAMBIO: Padding reducido y layout móvil a 2 columnas -->
-    <footer class="bg-gray-900 text-white pt-12 pb-8">
-        <div class="container mx-auto px-6">
-            <!-- CAMBIO: de grid-cols-1 a grid-cols-2 para móviles -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
-                
-                <!-- Columna 1: Logo y Redes -->
-                <div>
-                    <a href="index.html" class="inline-block mb-4 text-2xl font-bold tracking-wider text-white interactive">Lili Beauty Studio</a>
-                    <p class="text-sm text-gray-400 mb-4">Transformamos tu belleza natural con servicios expertos y una pasión por el detalle.</p>
-                    <div class="flex justify-center md:justify-start gap-6 mt-4">
-                        <a href="https://www.instagram.com/lili_beauty_oficial/" target="_blank" class="text-gray-400 hover:text-white transition-colors interactive">
-                            <img src="images/instagram-logo.png" alt="Instagram Lili Beauty" class="w-6 h-6" loading="lazy">
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=100076263302597" target="_blank" class="text-gray-400 hover:text-white transition-colors interactive">
-                            <img src="images/logo-facebook.png" alt="Facebook Lili Beauty" class="w-6 h-6" loading="lazy">
-                        </a>
-                     </div>
-                </div>
-
-                <!-- Columna 2: Navegación -->
-                <div>
-                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Navegación</h5>
-                    <nav class="flex flex-col space-y-2">
-                        <a href="#about" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Sobre Mí</a>
-                        <a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Servicios</a>
-                        <a href="#testimonials" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Reseñas</a>
-                        <a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Blog</a>
-                        <a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Contacto</a>
-                    </nav>
-                </div>
-
-                <!-- Columna 3: Servicios -->
-                <div>
-                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Servicios</h5>
-                    <nav class="flex flex-col space-y-2">
-                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab1">Diseño de Mirada</a>
-                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab2">Cejas y Depilación</a>
-                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab3">Diseño de Uñas</a>
-                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab4">Tratamientos Faciales</a>
-                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab5">Micropigmentación</a>
-                    </nav>
-                </div>
-
-                <!-- Columna 4: Contacto -->
-                <div>
-                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Contacto</h5>
-                    <p class="text-gray-400 text-sm mb-2">
-                        📍 Barrio Manga, Av. Jimenez<br>Ed. Entre Islas, Piso 1, Cartagena.
-                    </p>
-                    <p class="text-gray-400 text-sm">
-                        <a href="mailto:Lililashes22@gmail.com" class="hover:text-white interactive">Lililashes22@gmail.com</a>
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- Copyright -->
-            <!-- CAMBIO: Padding reducido -->
-            <div class="border-t border-gray-700 pt-6 text-center">
-                <p class="text-sm text-gray-400">
-                    &copy; 2025 Lili Beauty Studio Cartagena. Todos los derechos reservados.
-                </p>
-            </div>
+    <!-- INICIO: Footer Minimalista -->
+    <footer class="border-t border-gray-200 py-8 mt-12" style="background-color: var(--color-bg);">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-sm text-gray-500">
+                &copy; 2025 <span class="font-semibold text-gray-700">Lili Beauty Studio</span>. Todos los derechos reservados.
+            </p>
         </div>
     </footer>
-    <!-- FIN: Footer Estandarizado -->
+    <!-- FIN: Footer Minimalista -->
     
     
     <a href="https://wa.me/573234660971" class="whatsapp-float interactive" target="_blank" rel="noopener noreferrer">
@@ -838,6 +782,22 @@
     </a>
 
     <script src="js/app.js"></script>
+    
+    <!-- 
+        SCRIPT DE REDIRECCIÓN AUTOMÁTICA AL ADMIN 
+        Este código detecta si el usuario acaba de aceptar la invitación y lo manda directo al panel.
+    -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 
 </body>
 </html>
