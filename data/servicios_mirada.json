@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "nombre": "Set Clásicas PRO",
+      "descripcion": "Una extensión por pestaña natural para un resultado muy discreto y elegante.",
+      "precio": "$80.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-classic.jpg"
+    },
+    {
+      "nombre": "Set Pestañina",
+      "descripcion": "Aumentamos el grosor para un acabado más dramático sin perder naturalidad.",
+      "precio": "$95.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-mascara.jpg"
+    },
+    {
+      "nombre": "Volumen HAWAIANO",
+      "descripcion": "Abanicos de volumen súper livianos para una mezcla de movimiento y naturalidad.",
+      "precio": "$125.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-hawaiian.jpg"
+    },
+    {
+      "nombre": "Volumen SUAVE",
+      "descripcion": "Abanicos de volumen que aportan densidad manteniendo un acabado delicado.",
+      "precio": "$150.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-soft.jpg"
+    },
+    {
+      "nombre": "Coffee SET",
+      "descripcion": "Pestañas clásicas en color café, ideal para ojos claros y melenas rubias o pelirrojas.",
+      "precio": "$85.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-coffee.jpg"
+    },
+    {
+      "nombre": "Set LILI",
+      "descripcion": "Pestañas de seda en forma de espigas para generar un efecto húmedo y ligero.",
+      "precio": "$100.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-lili.jpg"
+    },
+    {
+      "nombre": "Volumen TECNOLÓGICO 4D (30% OFF)",
+      "descripcion": "Abanicos 4D ideales para personas con pestañas escasas, finas o frágiles.",
+      "precio": "$98.000 COP",
+      "precio_antiguo": "$140.000",
+      "imagen": "images/service-lashes-4d.jpg"
+    },
+    {
+      "nombre": "Volumen DARK",
+      "descripcion": "Para un efecto más marcado, profundo y con una densidad intensa en la mirada.",
+      "precio": "$165.000 COP",
+      "precio_antiguo": "",
+      "imagen": "images/service-lashes-dark.jpg"
+    }
+  ]
+}

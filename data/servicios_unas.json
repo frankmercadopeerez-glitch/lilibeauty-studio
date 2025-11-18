@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "nombre": "Manicure y pedicure\nTRADICIONAL", "precio": "$40.000 COP" },
+    { "nombre": "Manicure y pedicure\nSEMIPERMANENTE", "precio": "$80.000 COP" },
+    { "nombre": "Press on", "precio": "$80.000 COP" },
+    { "nombre": "Base ruber", "precio": "$70.000 COP" },
+    { "nombre": "Acrílicas", "precio": "$60.000 COP" }
+  ]
+}

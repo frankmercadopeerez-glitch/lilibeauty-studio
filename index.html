@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lili Beauty Studio - Profesionales de la Belleza en Cartagena</title>
+    <meta name="description" content="Expertos en extensiones de pestañas pelo a pelo, diseño de cejas, uñas y tratamientos faciales en Cartagena. Agenda tu cita y transforma tu belleza.">
+    
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Librería para convertir Markdown (para las FAQs) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <style>
+        :root {
+            --color-bg: #FFF8F5; 
+            --color-text: #4A3A3A; 
+            --color-text-light: #705f5f; 
+            --color-brand: #D4A3A8; 
+            --color-brand-dark: #B57B80; 
+            --color-gold: #B08D57; 
+            --color-gold-hover: #c9a36a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            cursor: none; 
+            overflow-x: hidden; 
+        }
+        
+        /* --- INICIO: Estilos Ojo Interactivo --- */
+        .eye {
+            width: 180px; 
+            height: 120px;
+            background-color: white;
+            border: 5px solid var(--color-brand-dark);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .pupil {
+            width: 60px;
+            height: 60px;
+            background-color: var(--color-text);
+            border-radius: 50%;
+            transition: transform 0.1s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            position: relative;
+        }
+
+        .pupil::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.9;
+        }
+
+        .eyelid {
+            position: absolute;
+            width: 100%;
+            height: 55%;
+            background-color: var(--color-bg);
+            border-bottom: 5px solid var(--color-brand-dark);
+            transform: scaleY(0);
+            z-index: 20;
+            animation: blink 5s infinite ease-in-out;
+        }
+
+        .eyelid.top {
+            top: 0;
+            transform-origin: top;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .eyelid.bottom {
+            bottom: 0;
+            transform-origin: bottom;
+            border-radius: 50% 50% 0 0;
+            border-bottom: none;
+            border-top: 5px solid var(--color-brand-dark);
+        }
+
+        @keyframes blink {
+            0%, 90%, 100% { transform: scaleY(0); }
+            95% { transform: scaleY(1); }
+        }
+        /* --- FIN: Estilos Ojo Interactivo --- */
+        
+        a, button, .interactive { cursor: none !important; }
+        
+        @media (hover: none) and (pointer: coarse) {
+            #custom-cursor { display: none !important; }
+        }
+
+        h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, textarea {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .text-title { color: var(--color-text); }
+        .text-body { color: var(--color-text-light); }
+        .text-gold { color: var(--color-gold); }
+        .bg-gold { background-color: var(--color-gold); }
+        .hover\:text-gold:hover { color: var(--color-gold-hover); }
+        .hover\:bg-gold:hover { background-color: var(--color-gold-hover); }
+        .border-gold { border-color: var(--color-gold); }
+
+        .submenu, .submenu-level2 {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            z-index: 100;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .group:hover .submenu { display: block; opacity: 1; transform: translateY(0); }
+        .group-level2:hover .submenu-level2 {
+            display: block; opacity: 1; transform: translateY(0);
+            left: 100%; top: -0.5rem; white-space: nowrap;
+        }
+        .submenu a, .submenu-level2 a {
+            display: block; padding: 0.75rem 1.25rem; color: var(--color-text); transition: all 0.2s ease;
+        }
+        .submenu a:hover, .submenu-level2 a:hover {
+            background-color: var(--color-bg); color: var(--color-gold-hover); padding-left: 1.5rem;
+        }
+        .submenu-level2.w-auto { width: max-content; }
+
+        .whatsapp-float {
+            position: fixed; width: 80px; bottom: 30px; right: 30px;
+            z-index: 100; transition: transform 0.3s ease; text-align: center;
+        }
+        .whatsapp-float img {
+            width: 50px; height: 50px; margin: 0 auto; 
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.25));
+        }
+        .whatsapp-float span {
+            font-size: 0.75rem; font-weight: 500; color: var(--color-text-light);
+            margin-top: 2px; display: block;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll { animation: scroll 20s linear infinite; }
+        @media (min-width: 768px) {
+            .animate-scroll { animation: scroll 30s linear infinite; }
+        }
+
+        .animate-on-load, .animate-on-scroll { opacity: 0; transform: translateY(30px); }
+        
+        .tab-content { display: none; }
+        @media (min-width: 768px) { .tab-content.active { display: block; } }
+
+        .tab-button.active {
+            background-color: var(--color-brand);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .accordion-content-services {
+            display: none; max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;
+        }
+        .accordion-header-services.active + .accordion-content-services {
+            display: block; max-height: 2000px; 
+        }
+        .accordion-header-services.active .accordion-icon { transform: rotate(180deg); }
+        .accordion-header-services.active {
+            background-color: var(--color-brand); color: white;
+        }
+        .accordion-header-services.active h3,
+        .accordion-header-services.active span { color: white !important; }
+        
+        .accordion-content-faq {
+            max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; padding: 0 1rem;
+        }
+        .accordion-header-faq.active + .accordion-content-faq {
+            max-height: 500px; padding: 0.5rem 1rem 1.5rem 1rem;
+        }
+        .accordion-header-faq.active .accordion-icon { transform: rotate(135deg); }
+
+        .accordion-header-nav { transition: background-color 0.3s ease; }
+        .accordion-header-nav.active { background-color: #f9fafb; }
+        .accordion-header-nav.active .accordion-icon-nav { transform: rotate(180deg); }
+        .accordion-icon-nav { transition: transform 0.3s ease; }
+        .accordion-content-nav {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; background-color: #f9fafb;
+        }
+        .accordion-header-nav.active + .accordion-content-nav { max-height: 1000px; }
+        .nav-submenu-link {
+            display: block; padding: 0.5rem 0 0.5rem 1.5rem; font-size: 0.9rem;
+            color: var(--color-text-light); transition: color 0.2s ease;
+        }
+        .nav-submenu-link:hover { color: var(--color-gold); }
+
+        .cms-loading {
+            min-height: 100px; display: flex; align-items: center; justify-content: center;
+            color: var(--color-text-light); font-style: italic;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div id="custom-cursor" class="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[999] transition-transform duration-100 ease-out" style="transform: translate(-50%, -50%);">
+        <img src="images/leer.png" alt="cursor" class="w-full h-full transition-transform duration-200 ease-in-out">
+    </div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white bg-opacity-100 shadow-xl z-[1000] p-8 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden overflow-y-auto">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-3xl text-text-light interactive">&times;</button>
+        
+        <nav class="flex flex-col space-y-4 text-lg mt-12">
+            <a href="#about" class="text-text-light hover:text-gold interactive mobile-menu-link py-2">Sobre Mí</a>
+
+            <!-- Acordeón de Servicios en Nav -->
+            <div>
+                <button class="accordion-header-nav w-full text-left font-semibold text-text-light hover:text-gold transition-colors interactive py-2 flex justify-between items-center">
+                    <span>Servicios</span>
+                    <span class="accordion-icon-nav text-sm transform">&#9662;</span>
+                </button>
+                <div class="accordion-content-nav">
+                    <div class="py-2">
+                        <span class="font-semibold text-gold text-sm pl-4">Diseño de Mirada</span>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Set Clásicas PRO</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Coffee SET</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Set Pestañina</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Set LILI</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Volumen HAWAIANO</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Volumen TECNOLÓGICO 4D</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Volumen SUAVE</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-1">Volumen DARK</a>
+                    </div>
+                    <div class="py-2">
+                        <span class="font-semibold text-gold text-sm pl-4">Cejas y Depilación</span>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Laminado de cejas</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Lifting de pestañas</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Retiro de pestañas</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación de cejas</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación + sombreado</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación de bozo</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación Axilas</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación Media pierna</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-2">Depilación Pierna completa</a>
+                    </div>
+                    <div class="py-2">
+                        <span class="font-semibold text-gold text-sm pl-4">Diseño de Uñas</span>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-3">Manicure y pedicure TRADICIONAL</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-3">Manicure y pedicure SEMIPERMANENTE</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-3">Press on</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-3">Base ruber</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-3">Acrílicas</a>
+                    </div>
+                    <div class="py-2">
+                        <span class="font-semibold text-gold text-sm pl-4">Tratamientos Faciales</span>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-4">Limpieza Facial Básica</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-4">Limpieza Facial Profunda</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-4">Tratamiento Antimanchas</a>
+                    </div>
+                    <div class="py-2">
+                        <span class="font-semibold text-gold text-sm pl-4">Micropigmentación</span>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-5">Lili Lips - Neutralización de Color</a>
+                        <a href="#" class="nav-submenu-link interactive" data-tab-mobile="tab-mobile-5">Lili Lips - Efecto Acuarela</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Acordeón de Servicios en Nav -->
+
+            <a href="blog/index.html" class="text-text-light hover:text-gold interactive mobile-menu-link py-2">Blog</a>
+            <a href="#testimonials" class="text-text-light hover:text-gold interactive mobile-menu-link py-2">Reseñas</a>
+            <a href="#contact" class="text-text-light hover:text-gold interactive mobile-menu-link py-2">Contacto</a>
+            <a href="https://wa.me/573234660971" target="_blank" class="mt-4 inline-block bg-gold text-white text-center font-semibold py-3 px-6 rounded-full interactive">
+                Agendar Cita
+            </a>
+        </nav>
+    </div>
+    
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/40 z-[990] md:hidden" style="display: none;"></div>
+
+
+    <header class="sticky top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold tracking-wider text-title interactive">Lili Beauty Studio</a>
+            
+            <nav class="hidden md:flex space-x-6 text-sm tracking-wide items-center">
+                <a href="#about" class="text-text-light hover:text-gold transition-colors interactive">Sobre Mí</a>
+                
+                <div class="group relative"> 
+                    <a href="#services" class="text-text-light hover:text-gold transition-colors interactive cursor-pointer flex items-center">
+                        Servicios <span class="ml-1 text-xs">&#9662;</span>
+                    </a>
+                    
+                    <div class="submenu w-60">
+                        
+                        <div class="group-level2 relative"> 
+                            <a href="#services" class="nav-desktop-link flex justify-between items-center interactive" data-tab="tab1">
+                                Diseño de Mirada <span class="text-xs">&#9656;</span>
+                            </a>
+                            
+                            <div class="submenu-level2 w-auto">
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Set Clásicas PRO</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Coffee SET</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Set Pestañina</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Set LILI</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Volumen HAWAIANO</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Volumen TECNOLÓGICO 4D</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Volumen SUAVE</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab1">Volumen DARK</a>
+                            </div>
+                        </div>
+                        
+                        <div class="group-level2 relative">
+                            <a href="#services" class="nav-desktop-link flex justify-between items-center interactive" data-tab="tab2">
+                                Cejas y Depilación <span class="text-xs">&#9656;</span>
+                            </a>
+                            <div class="submenu-level2 w-auto">
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Laminado de cejas</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Lifting de pestañas</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Retiro de pestañas</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación de cejas</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación + sombreado</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación de bozo</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación Axilas</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación Media pierna</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab2">Depilación Pierna completa</a>
+                            </div>
+                        </div>
+                        
+                        <div class="group-level2 relative">
+                            <a href="#services" class="nav-desktop-link flex justify-between items-center interactive" data-tab="tab3">
+                                Diseño de Uñas <span class="text-xs">&#9656;</span>
+                            </a>
+                            
+                            <div class="submenu-level2 w-auto">
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab3">Manicure y pedicure<br>TRADICIONAL</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab3">Manicure y pedicure<br>SEMIPERMANENTE</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab3">Press on</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab3">Base ruber</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab3">Acrílicas</a>
+                            </div>
+                        </div>
+                        
+                        <div class="group-level2 relative">
+                            <a href="#services" class="nav-desktop-link flex justify-between items-center interactive" data-tab="tab4">
+                                Tratamientos Faciales <span class="text-xs">&#9656;</span>
+                            </a>
+                            <div class="submenu-level2 w-auto">
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab4">Limpieza Facial Básica</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab4">Limpieza Facial Profunda</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab4">Tratamiento Antimanchas</a>
+                            </div>
+                        </div>
+                        
+                        <div class="group-level2 relative">
+                            <a href="#services" class="nav-desktop-link flex justify-between items-center interactive" data-tab="tab5">
+                                Micropigmentación <span class="text-xs">&#9656;</span>
+                            </a>
+                            <div class="submenu-level2 w-auto">
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab5">Lili Lips - Neutralización de Color</a>
+                                <a href="#services" class="nav-desktop-link interactive" data-tab="tab5">Lili Lips - Efecto Acuarela</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <a href="blog/index.html" class="text-text-light hover:text-gold transition-colors interactive">Blog</a>
+                <a href="#testimonials" class="text-text-light hover:text-gold transition-colors interactive">Reseñas</a>
+                <a href="#contact" class="text-text-light hover:text-gold transition-colors interactive">Contacto</a>
+                <a href="https://wa.me/573234660971" target="_blank" class="bg-gold text-white font-semibold py-2 px-5 rounded-full hover:bg-gold-hover transition-colors interactive">
+                    Agendar Cita
+                </a>
+            </nav>
+
+            
+            <button id="mobile-menu-btn" class="md:hidden text-3xl text-title interactive">
+                &#9776;
+            </button>
+        </div>
+    </header>
+
+    <main class="overflow-visible">
+
+        
+        <section class="min-h-screen bg-cover bg-center pt-32 pb-16 flex items-center" style="background-image: url('images/hero-bg.jpg');">
+            
+            <div class="container mx-auto px-6 text-center sm:text-left">
+                <div class="bg-white/80 backdrop-blur-sm p-8 rounded-lg max-w-lg">
+                    <!-- CONTENIDO EDITABLE: Portada -->
+                    <h1 id="hero-titulo" class="text-4xl md:text-5xl font-bold leading-tight text-title animate-on-load">Cargando...</h1>
+                    <p id="hero-descripcion" class="mt-4 text-text-light text-lg animate-on-load" style="animation-delay: 0.2s;">Cargando...</p>
+                    <!-- FIN CONTENIDO EDITABLE -->
+                    <div class="mt-8 animate-on-load" style="animation-delay: 0.4s;">
+                        <a href="#services" class="inline-block bg-gold text-white font-semibold py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105 interactive">
+                            Nuestros servicios en Cartagena
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="about" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center animate-on-scroll">
+                    <img src="images/about-ana.jpg" alt="Retrato de Ana Mercado, fundadora de Lili Beauty Studio" class="rounded-lg shadow-xl w-full h-auto object-cover" loading="lazy">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-title">¡Hola! Soy Lili</h2>
+                        
+                        <!-- CONTENIDO EDITABLE: Sobre Mí -->
+                        <div id="about-content">
+                            <p class="text-text-light mb-4 leading-relaxed text-justify">Cargando...</p>
+                            <p class="text-text-light leading-relaxed text-justify"></p>
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="services" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 animate-on-scroll">
+                
+                <!-- INICIO: Ojo Interactivo -->
+                <div class="flex flex-col items-center mb-12">
+                    <div class="eye">
+                        <div class="pupil"></div>
+                        <div class="eyelid top"></div>
+                        <div class="eyelid bottom"></div>
+                    </div>
+                </div>
+                <!-- FIN: Ojo Interactivo -->
+
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-title">Nuestros Servicios de Belleza</h2>
+                
+                
+                <div class="hidden md:flex max-w-7xl mx-auto gap-10">
+                    
+                    <div class="w-1/4 flex flex-col space-y-2">
+                        <button class="tab-button text-left p-4 rounded-lg font-semibold text-text-light transition-all duration-300 interactive active" data-tab="tab1">
+                            <span class="text-xl">👁️</span> Diseño de Mirada
+                        </button>
+                        <button class="tab-button text-left p-4 rounded-lg font-semibold text-text-light transition-all duration-300 interactive" data-tab="tab2">
+                            <span class="text-xl">✍️</span> Cejas y Depilación
+                        </button>
+                        <button class="tab-button text-left p-4 rounded-lg font-semibold text-text-light transition-all duration-300 interactive" data-tab="tab3">
+                            <span class="text-xl">💅</span> Diseño de Uñas
+                        </button>
+                        <button class="tab-button text-left p-4 rounded-lg font-semibold text-text-light transition-all duration-300 interactive" data-tab="tab4">
+                            <span class="text-xl">🌿</span> Tratamientos Faciales
+                        </button>
+                        <button class="tab-button text-left p-4 rounded-lg font-semibold text-text-light transition-all duration-300 interactive" data-tab="tab5">
+                            <span class="text-xl">💄</span> Micropigmentación
+                        </button>
+                    </div>
+
+                    
+                    <div class="w-3/4 bg-gray-50 p-8 rounded-lg hidden md:block">
+                        
+                        <div id="tab1" class="tab-content active">
+                            <h3 class="text-2xl font-bold text-title mb-6">Diseño de Mirada - Extensiones de Pestañas</h3>
+                            <!-- CONTENIDO EDITABLE: Servicios Mirada (Desktop) -->
+                            <div id="servicios-mirada-desktop" class="grid grid-cols-1 md:grid-cols-2 gap-8 cms-loading">
+                                Cargando servicios...
+                            </div>
+                            <!-- FIN CONTENIDO EDITABLE -->
+                        </div>
+                        
+                        <div id="tab2" class="tab-content">
+                            <h3 class="text-2xl font-bold text-title mb-6">Cuidado de Cejas y Depilación</h3>
+                            <!-- CONTENIDO EDITABLE: Servicios Cejas (Desktop) -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+                                <ul id="servicios-cejas-col1-desktop" class="space-y-4 cms-loading">
+                                    Cargando...
+                                </ul>
+                                <ul id="servicios-cejas-col2-desktop" class="space-y-4">
+                                    <!-- Se llena con JS -->
+                                </ul>
+                            </div>
+                            <!-- FIN CONTENIDO EDITABLE -->
+                        </div>
+                        
+                        <div id="tab3" class="tab-content">
+                            <h3 class="text-2xl font-bold text-title mb-6">Diseño de Uñas</h3>
+                            <!-- CONTENIDO EDITABLE: Servicios Uñas (Desktop) -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+                                <ul id="servicios-unas-col1-desktop" class="space-y-4 cms-loading">
+                                    Cargando...
+                                </ul>
+                                <ul id="servicios-unas-col2-desktop" class="space-y-4">
+                                    <!-- Se llena con JS -->
+                                </ul>
+                            </div>
+                            <!-- FIN CONTENIDO EDITABLE -->
+                        </div>
+                        
+                        <div id="tab4" class="tab-content">
+                            <h3 class="text-2xl font-bold text-title mb-6">Tratamientos Faciales</h3>
+                            <!-- CONTENIDO EDITABLE: Servicios Faciales (Desktop) -->
+                            <div id="servicios-faciales-desktop" class="space-y-6 max-w-lg cms-loading">
+                                Cargando...
+                            </div>
+                            <!-- FIN CONTENIDO EDITABLE -->
+                        </div>
+                        
+                        <div id="tab5" class="tab-content">
+                            <h3 class="text-2xl font-bold text-title mb-6">Micropigmentación de Labios</h3>
+                            <!-- CONTENIDO EDITABLE: Servicios Micro (Desktop) -->
+                            <div id="servicios-micro-desktop" class="space-y-6 max-w-lg cms-loading">
+                                Cargando...
+                            </div>
+                            <!-- FIN CONTENIDO EDITABLE -->
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="md:hidden space-y-2">
+                    
+                    <div>
+                        <button class="accordion-header-services w-full text-left p-4 rounded-lg font-semibold transition-all duration-300 flex justify-between items-center interactive bg-white shadow-sm" data-tab-mobile="tab-mobile-1">
+                            <h3 class="text-lg text-title"><span class="text-xl mr-2">👁️</span> Diseño de Mirada</h3>
+                            <span class="accordion-icon text-xl text-brand-dark transition-transform duration-300">&#43;</span>
+                        </button>
+                        <!-- CONTENIDO EDITABLE: Servicios Mirada (Mobile) -->
+                        <div id="servicios-mirada-mobile" class="accordion-content-services bg-white rounded-b-lg p-6 space-y-4 cms-loading">
+                            Cargando...
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                    
+                    <div>
+                        <button class="accordion-header-services w-full text-left p-4 rounded-lg font-semibold transition-all duration-300 flex justify-between items-center interactive bg-white shadow-sm" data-tab-mobile="tab-mobile-2">
+                            <h3 class="text-lg text-title"><span class="text-xl mr-2">✍️</span> Cejas y Depilación</h3>
+                            <span class="accordion-icon text-xl text-brand-dark transition-transform duration-300">&#43;</span>
+                        </button>
+                        <!-- CONTENIDO EDITABLE: Servicios Cejas (Mobile) -->
+                        <div class="accordion-content-services bg-white rounded-b-lg p-6 space-y-3">
+                            <ul id="servicios-cejas-mobile" class="space-y-3 cms-loading">
+                                Cargando...
+                            </ul>
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                    
+                    <div>
+                        <button class="accordion-header-services w-full text-left p-4 rounded-lg font-semibold transition-all duration-300 flex justify-between items-center interactive bg-white shadow-sm" data-tab-mobile="tab-mobile-3">
+                            <h3 class="text-lg text-title"><span class="text-xl mr-2">💅</span> Diseño de Uñas</h3>
+                            <span class="accordion-icon text-xl text-brand-dark transition-transform duration-300">&#43;</span>
+                        </button>
+                        <!-- CONTENIDO EDITABLE: Servicios Uñas (Mobile) -->
+                        <div class="accordion-content-services bg-white rounded-b-lg p-6 space-y-3">
+                            <ul id="servicios-unas-mobile" class="space-y-3 cms-loading">
+                                Cargando...
+                            </ul>
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                    
+                    <div>
+                        <button class="accordion-header-services w-full text-left p-4 rounded-lg font-semibold transition-all duration-300 flex justify-between items-center interactive bg-white shadow-sm" data-tab-mobile="tab-mobile-4">
+                            <h3 class="text-lg text-title"><span class="text-xl mr-2">🌿</span> Tratamientos Faciales</h3>
+                            <span class="accordion-icon text-xl text-brand-dark transition-transform duration-300">&#43;</span>
+                        </button>
+                        <!-- CONTENIDO EDITABLE: Servicios Faciales (Mobile) -->
+                        <div id="servicios-faciales-mobile" class="accordion-content-services bg-white rounded-b-lg p-6 space-y-4 cms-loading">
+                            Cargando...
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                    
+                    <div>
+                        <button class="accordion-header-services w-full text-left p-4 rounded-lg font-semibold transition-all duration-300 flex justify-between items-center interactive bg-white shadow-sm" data-tab-mobile="tab-mobile-5">
+                            <h3 class="text-lg text-title"><span class="text-xl mr-2">💄</span> Micropigmentación</h3>
+                            <span class="accordion-icon text-xl text-brand-dark transition-transform duration-300">&#43;</span>
+                        </button>
+                        <!-- CONTENIDO EDITABLE: Servicios Micro (Mobile) -->
+                        <div id="servicios-micro-mobile" class="accordion-content-services bg-white rounded-b-lg p-6 space-y-4 cms-loading">
+                            Cargando...
+                        </div>
+                        <!-- FIN CONTENIDO EDITABLE -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        
+        <section id="testimonials" class="py-20 md:py-28">
+            <div class="container mx-auto px-6 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-title">Lo que dicen nuestras clientas</h2>
+                
+                <div class="relative w-full max-w-7xl mx-auto overflow-hidden">
+                    
+                    <div class="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-bg to-transparent z-10"></div>
+                    <div class="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-bg to-transparent z-10"></div>
+                    
+                    
+                    <div class="flex w-max animate-scroll">
+                        
+                        <div class="flex space-x-6 px-3">
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Sofía Pérez</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Valentina Castro</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Camila Rodríguez</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"El mejor lugar para un facial profundo en Manga. Salí con la piel renovada y brillante. La atención al detalle es inigualable."</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Isabella Gómez</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-6 px-3">
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"¡Mis pestañas nunca se habían visto tan bien! El trato es súper profesional y el resultado es increíble. ¡100% recomendada!"</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Sofía Pérez</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"Lili tiene unas manos mágicas. Me hice el laminado de cejas y el cambio es espectacular. El estudio es hermoso y muy limpio."</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Valentina Castro</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"La mejor experiencia en Cartagena. Siempre salgo feliz con mis uñas y el ambiente es súper relajante. ¡Gracias Lili!"</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Camila Rodríguez</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg shadow-md w-72 md:w-96 flex-shrink-0">
+                                <div class="text-yellow-400 mb-3">★★★★★ <span class="text-sm text-gray-400 ml-2">G</span></div>
+                                <p class="text-text-light italic text-sm md:text-base">"El mejor lugar para un facial profundo en Manga. Salí con la piel renovada y brillante. La atención al detalle es inigualable."</p>
+                                <p class="font-bold text-right text-sm text-title mt-3">- Isabella Gómez</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="blog" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 max-w-5xl animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-title">Visita Nuestro Blog</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <a href="blog/cuanto-cuestan-pestanas-cartagena/" class="block bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 interactive">
+                        <span class="text-sm text-brand-dark font-medium">Precios y Consejos</span>
+                        <h3 class="text-2xl font-bold my-2 text-title hover:text-gold transition-colors">¿Cuánto cuestan las pestañas pelo a pelo en Cartagena?</h3>
+                        <p class="text-text-light mb-4">Analizamos los precios y factores que influyen en el costo de las extensiones en la ciudad...</p>
+                        <span class="font-bold text-gold hover:text-gold-hover">Leer artículo completo &rarr;</span>
+                    </a>
+                    
+                    <a href="blog/lifting-vs-extensiones/" class="block bg-gray-50 p-8 rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300 interactive">
+                        <span class="text-sm text-brand-dark font-medium">Cuidado Personal</span>
+                        <h3 class="text-2xl font-bold my-2 text-title hover:text-gold transition-colors">Lifting vs. Extensiones: ¿Cuál es mejor para ti?</h3>
+                        <p class="text-text-light mb-4">Comparamos dos de los tratamientos de mirada más populares para ayudarte a decidir...</p>
+                        <span class="font-bold text-gold hover:text-gold-hover">Leer artículo completo &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        
+        <section id="faq" class="py-20 md:py-28">
+            <div class="container mx-auto px-6 max-w-3xl animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-title">Preguntas Frecuentes</h2>
+                <!-- CONTENIDO EDITABLE: Preguntas Frecuentes -->
+                <div id="faq-list" class="space-y-4 cms-loading">
+                    Cargando preguntas...
+                </div>
+                <!-- FIN CONTENIDO EDITABLE -->
+            </div>
+        </section>
+
+        
+        <section id="contact" class="py-20 md:py-28 bg-white">
+            <div class="container mx-auto px-6 text-center max-w-3xl animate-on-scroll">
+                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-title">Visítanos en Cartagena</h2>
+                 <p class="text-text-light mb-10 max-w-xl mx-auto">Estamos en el corazón de Manga, listas para atenderte y transformar tu belleza. ¡Agenda tu cita hoy!</p>
+                 
+                 <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12 mb-10">
+                    <div class="text-left">
+                        <p class="flex items-center text-lg">
+                            <span class="text-2xl mr-3">📍</span>
+                            <span>Barrio Manga, Av. Jimenez Calle 26 #18,<br>Edificio Entre Islas, Piso 1.</span>
+                        </p>
+                    </div>
+                     <div class="text-left">
+                        <p class="flex items-center text-lg">
+                            <span class="text-2xl mr-3">✉️</span>
+                             <a href="mailto:Lililashes22@gmail.com" class="hover:text-gold interactive">Lililashes22@gmail.com</a>
+                        </p>
+                    </div>
+                 </div>
+
+                 <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="https://maps.app.goo.gl/gaUMJDuN5mMa33527" target="_blank" rel="noopener noreferrer" class="inline-block text-center bg-gold text-white font-semibold py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105 interactive">
+                        Ver en Google Maps
+                    </a>
+                    <a href="https://wa.me/573234660971" target="_blank" class="inline-block text-center bg-white border border-gold text-gold font-semibold py-3 px-8 rounded-full text-lg transform transition-transform duration-300 hover:scale-105 hover:bg-gray-50 interactive">
+                        Agendar por WhatsApp
+                    </a>
+                 </div>
+
+                 <div class="flex justify-center gap-8 mt-12">
+                    <a href="https://wa.me/573234660971" target="_blank" class="interactive transform hover:scale-110 transition-transform">
+                        <img src="images/whatsapp-logo.png" alt="WhatsApp" class="w-8 h-8">
+                    </a>
+                    <a href="https://www.instagram.com/lili_beauty_oficial/" target="_blank" class="interactive transform hover:scale-110 transition-transform">
+                        <img src="images/instagram-logo.png" alt="Instagram" class="w-8 h-8">
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100076263302597" target="_blank" class="interactive transform hover:scale-110 transition-transform">
+                        <img src="images/logo-facebook.png" alt="Facebook" class="w-8 h-8">
+                    </a>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    
+    <!-- INICIO: Footer Estandarizado -->
+    <!-- CAMBIO: Padding reducido y layout móvil a 2 columnas -->
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="container mx-auto px-6">
+            <!-- CAMBIO: de grid-cols-1 a grid-cols-2 para móviles -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 text-center md:text-left">
+                
+                <!-- Columna 1: Logo y Redes -->
+                <div>
+                    <a href="index.html" class="inline-block mb-4 text-2xl font-bold tracking-wider text-white interactive">Lili Beauty Studio</a>
+                    <p class="text-sm text-gray-400 mb-4">Transformamos tu belleza natural con servicios expertos y una pasión por el detalle.</p>
+                    <div class="flex justify-center md:justify-start gap-6 mt-4">
+                        <a href="https://www.instagram.com/lili_beauty_oficial/" target="_blank" class="text-gray-400 hover:text-white transition-colors interactive">
+                            <img src="images/instagram-logo.png" alt="Instagram Lili Beauty" class="w-6 h-6" loading="lazy">
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100076263302597" target="_blank" class="text-gray-400 hover:text-white transition-colors interactive">
+                            <img src="images/logo-facebook.png" alt="Facebook Lili Beauty" class="w-6 h-6" loading="lazy">
+                        </a>
+                     </div>
+                </div>
+
+                <!-- Columna 2: Navegación -->
+                <div>
+                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Navegación</h5>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="#about" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Sobre Mí</a>
+                        <a href="#services" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Servicios</a>
+                        <a href="#testimonials" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Reseñas</a>
+                        <a href="blog/index.html" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Blog</a>
+                        <a href="#contact" class="text-gray-400 hover:text-white transition-colors text-sm interactive">Contacto</a>
+                    </nav>
+                </div>
+
+                <!-- Columna 3: Servicios -->
+                <div>
+                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Servicios</h5>
+                    <nav class="flex flex-col space-y-2">
+                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab1">Diseño de Mirada</a>
+                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab2">Cejas y Depilación</a>
+                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab3">Diseño de Uñas</a>
+                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab4">Tratamientos Faciales</a>
+                        <a href="#services" class="nav-desktop-link text-gray-400 hover:text-white transition-colors text-sm interactive" data-tab="tab5">Micropigmentación</a>
+                    </nav>
+                </div>
+
+                <!-- Columna 4: Contacto -->
+                <div>
+                    <h5 class="font-bold text-white mb-4 uppercase text-sm tracking-wider">Contacto</h5>
+                    <p class="text-gray-400 text-sm mb-2">
+                        📍 Barrio Manga, Av. Jimenez<br>Ed. Entre Islas, Piso 1, Cartagena.
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        <a href="mailto:Lililashes22@gmail.com" class="hover:text-white interactive">Lililashes22@gmail.com</a>
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <!-- CAMBIO: Padding reducido -->
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="text-sm text-gray-400">
+                    &copy; 2025 Lili Beauty Studio Cartagena. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- FIN: Footer Estandarizado -->
+    
+    
+    <a href="https://wa.me/573234660971" class="whatsapp-float interactive" target="_blank" rel="noopener noreferrer">
+        <img src="images/whatsapp-logo.png" alt="Agenda tu cita en WhatsApp" loading="lazy">
+        <span>Agenda tu cita</span>
+    </a>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>

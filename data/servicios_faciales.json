@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "nombre": "Limpieza Facial Básica",
+      "descripcion": "Incluye Exfoliación, Vapor ozono, Extracción de puntos negros, Mascarilla, Alta frecuencia, Hidratación y protección solar.",
+      "precio": "$95.000 COP",
+      "precio_antiguo": ""
+    },
+    {
+      "nombre": "Limpieza Facial Profunda (30% OFF)",
+      "descripcion": "Incluye todo lo de la básica más Microdermoabrasión y Terapia con Máscara LED.",
+      "precio": "$84.000 COP",
+      "precio_antiguo": "$120.000"
+    },
+    {
+      "nombre": "Tratamiento Antimanchas (Peeling)",
+      "descripcion": "",
+      "precio": "$50.000 COP",
+      "precio_antiguo": ""
+    }
+  ]
+}

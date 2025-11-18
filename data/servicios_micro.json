@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "nombre": "Lili Lips - Neutralización de Color (30% OFF)",
+      "descripcion": "Ideal para corregir tonalidades oscuras o violáceas en los labios, devolviéndoles un color rosado, uniforme y saludable.",
+      "precio": "$280.000 COP",
+      "precio_antiguo": "$400.000"
+    },
+    {
+      "nombre": "Lili Lips - Efecto Acuarela",
+      "descripcion": "Define el contorno y aporta un toque de color suave y traslúcido, logrando un aspecto de labios revitalizados y jugosos.",
+      "precio": "$350.000 COP",
+      "precio_antiguo": ""
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+# Backend (Cambiado a 'git-gateway' para el modo REAL)
+backend:
+  name: git-gateway
+  branch: main # O 'master' si usas esa rama
+
+# Dónde guardar las imágenes que tu hermana suba
+media_folder: "images/uploads" # Las imágenes se guardan aquí
+public_folder: "/images/uploads" # Cómo se acceden desde el sitio
+
+# Colecciones (El contenido editable)
+collections:
+  - name: "contenido"
+    label: "Contenido del Sitio"
+    description: "Haz clic en un ítem de la lista para editar el contenido de esa sección."
+    files:
+      # 1. Página: Portada
+      - file: "/data/pagina_portada.json"
+        label: "Página: Portada (Hero)"
+        name: "portada"
+        fields:
+          - { label: "Título", name: "titulo", widget: "string" }
+          - { label: "Descripción", name: "descripcion", widget: "text" }
+          
+      # 2. Página: Sobre Mí
+      - file: "/data/pagina_sobre_mi.json"
+        label: "Página: Sobre Mí"
+        name: "sobre_mi"
+        fields:
+          - { label: "Primer Párrafo", name: "parrafo_1", widget: "text" }
+          - { label: "Segundo Párrafo", name: "parrafo_2", widget: "text" }
+
+      # 3. Servicios: Diseño de Mirada
+      - file: "/data/servicios_mirada.json"
+        label: "Servicios: Diseño de Mirada"
+        name: "servicios_mirada"
+        fields:
+          - name: "items"
+            label: "Servicios de Mirada"
+            widget: "list"
+            fields:
+              - { label: "Nombre del Servicio", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio (ej: $80.000 COP)", name: "precio", widget: "string" }
+              - { label: "Precio Antiguo (Opcional, para ofertas)", name: "precio_antiguo", widget: "string", required: false }
+              - { label: "Imagen", name: "imagen", widget: "image" }
+
+      # 4. Servicios: Cejas y Depilación
+      - file: "/data/servicios_cejas.json"
+        label: "Servicios: Cejas y Depilación"
+        name: "servicios_cejas"
+        fields:
+          - name: "items"
+            label: "Servicios"
+            widget: "list"
+            fields:
+              - { label: "Nombre del Servicio", name: "nombre", widget: "string" }
+              - { label: "Precio (ej: $80.000 COP)", name: "precio", widget: "string" }
+
+      # 5. Servicios: Diseño de Uñas
+      - file: "/data/servicios_unas.json"
+        label: "Servicios: Diseño de Uñas"
+        name: "servicios_unas"
+        description: "Para saltos de línea en el nombre, usa el widget 'text' (ej: Manicure... \nTRADICIONAL)"
+        fields:
+          - name: "items"
+            label: "Servicios"
+            widget: "list"
+            fields:
+              - { label: "Nombre del Servicio", name: "nombre", widget: "text" }
+              - { label: "Precio (ej: $40.000 COP)", name: "precio", widget: "string" }
+              
+      # 6. Servicios: Tratamientos Faciales
+      - file: "/data/servicios_faciales.json"
+        label: "Servicios: Tratamientos Faciales"
+        name: "servicios_faciales"
+        fields:
+          - name: "items"
+            label: "Servicios"
+            widget: "list"
+            fields:
+              - { label: "Nombre del Servicio", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio (ej: $95.000 COP)", name: "precio", widget: "string" }
+              - { label: "Precio Antiguo (Opcional, para ofertas)", name: "precio_antiguo", widget: "string", required: false }
+
+      # 7. Servicios: Micropigmentación
+      - file: "/data/servicios_micro.json"
+        label: "Servicios: Micropigmentación"
+        name: "servicios_micro"
+        fields:
+          - name: "items"
+            label: "Servicios"
+            widget: "list"
+            fields:
+              - { label: "Nombre del Servicio", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "descripcion", widget: "text" }
+              - { label: "Precio (ej: $350.000 COP)", name: "precio", widget: "string" }
+              - { label: "Precio Antiguo (Opcional, para ofertas)", name: "precio_antiguo", widget: "string", required: false }
+
+      # 8. Preguntas Frecuentes
+      - file: "/data/faq.json"
+        label: "Página: Preguntas Frecuentes"
+        name: "faq"
+        fields:
+          - name: "items"
+            label: "Preguntas"
+            widget: "list"
+            fields:
+              - { label: "Pregunta", name: "pregunta", widget: "string" }
+              - { label: "Respuesta", name: "respuesta", widget: "markdown" }

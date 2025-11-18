@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "nombre": "Laminado de cejas", "precio": "$80.000 COP" },
+    { "nombre": "Lifting de pestañas", "precio": "$80.000 COP" },
+    { "nombre": "Retiro de pestañas", "precio": "$20.000 COP" },
+    { "nombre": "Depilación de cejas", "precio": "$15.000 COP" },
+    { "nombre": "Depilación + sombreado", "precio": "$25.000 COP" },
+    { "nombre": "Depilación de bozo", "precio": "$10.000 COP" },
+    { "nombre": "Depilación Axilas", "precio": "$18.000 COP" },
+    { "nombre": "Depilación Media pierna", "precio": "$35.000 COP" },
+    { "nombre": "Depilación Pierna completa", "precio": "$60.000 COP" }
+  ]
+}
