@@ -1,0 +1,11 @@
+# Redirects para Netlify
+# Formato: desde  hacia  código
+
+# 404 personalizada
+/* /404.html 404
+
+# Redirección de URLs sin trailing slash (por si acaso)
+/servicios  /servicios/  301
+/blog       /blog/        301
+/cursos     /cursos/      301
+/barrios    /barrios/     301

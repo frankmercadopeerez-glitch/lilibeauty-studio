@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- INICIO -->
+  <url><loc>https://lilibeautystudio.com/</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+
+  <!-- HUB DE SERVICIOS -->
+  <url><loc>https://lilibeautystudio.com/servicios/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
+
+  <!-- PÁGINAS DE SERVICIOS INDIVIDUALES -->
+  <url><loc>https://lilibeautystudio.com/servicios/extensiones-de-pestanas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://lilibeautystudio.com/servicios/lifting-de-pestanas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lilibeautystudio.com/servicios/laminado-de-cejas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lilibeautystudio.com/servicios/micropigmentacion-labios-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lilibeautystudio.com/servicios/limpieza-facial-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lilibeautystudio.com/servicios/diseno-de-unas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+
+  <!-- CURSOS -->
+  <url><loc>https://lilibeautystudio.com/cursos/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.85</priority></url>
+
+  <!-- BLOG -->
+  <url><loc>https://lilibeautystudio.com/blog/</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/cuanto-cuestan-pestanas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/lifting-vs-extensiones/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/micropigmentacion-labios-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/unas-acrilicas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/laminado-de-cejas-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/blog/limpieza-facial-profunda-cartagena/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- BARRIOS / SEO LOCAL -->
+  <url><loc>https://lilibeautystudio.com/barrios/manga/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/bocagrande/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/castillogrande/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/centro-historico/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/pie-de-la-popa/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/getsemani/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/crespo/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/marbella/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/bello-horizonte/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://lilibeautystudio.com/barrios/ternera/</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+</urlset>
